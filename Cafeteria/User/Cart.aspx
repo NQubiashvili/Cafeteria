@@ -11,7 +11,7 @@
                 <div class="align-self-end">
                     <asp:Label ID="lblMsg" runat="server" Visible="false"></asp:Label>
                 </div>
-                <h2>your Shopping Cart
+                <h2>კალათა
                 </h2>
             </div>
         </div>
@@ -22,11 +22,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Unit Price</th>
-                                <th>Quantity</th>
-                                <th>Tottal Price</th>
+                                <th>სახელი</th>
+                                <th>სურათი</th>
+                                <th>თითოს ფასი</th>
+                                <th>რაოდენობა</th>
+                                <th>ჯამური ფასი</th>
                                 <th></th>
                             </tr>
                         </thead>

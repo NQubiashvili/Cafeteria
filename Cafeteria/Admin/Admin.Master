@@ -109,7 +109,7 @@
                     <div class="navbar-wrapper">
 
                         <div class="navbar-logo" style="display: flex;justify-content: center; align-items: center;">
-                            <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <a class="mobile-menu" id="mobile-collapse" href="#!"/>
                                 <i class="ti-menu"></i>
                                 <a href="Dashboard.aspx">
                                     <img class="img-fluid" src="../assets/images/Logo.png" alt="Theme-Logo" 
@@ -178,7 +178,7 @@
                                     <li>
                                         <a href="Category.aspx">
                                             <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Categories</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">კატეგორია</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -190,7 +190,7 @@
                                     <li>
                                         <a href="Product.aspx">
                                             <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Product</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">პროდუქტი</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>

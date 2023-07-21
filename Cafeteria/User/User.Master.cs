@@ -28,13 +28,13 @@ namespace Cafeteria.User
 
             if (Session["userId"] != null)
             {
-                lbLoginOrLogout.Text = "Logout";
+                lbLoginOrLogout.Text = "გამოსვლა";
                 Utils utils = new Utils();
                 Session["cartCount"] = utils.cartCount(Convert.ToInt32(Session["userId"])).ToString();
             }
             else
             {
-                lbLoginOrLogout.Text = "Login";
+                lbLoginOrLogout.Text = "ავტორიზაცია";
                 Session["cartCount"] = "0";
             }
         }

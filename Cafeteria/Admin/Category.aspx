@@ -52,32 +52,32 @@
                                     <div class="row">
 
                                         <div class="col-sm-6 col-md-4 col-lg-4">
-                                            <h4 class="sub-title">Category</h4>
+                                            <h4 class="sub-title">კატეგორია</h4>
                                             <div>
                                                 <div class="form-group">
-                                                    <label>Category Name</label>
+                                                    <label>კატეგორიის სახელი</label>
                                                     <div>
                                                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control"
-                                                            placeholder="Enter Category Name" required></asp:TextBox>
+                                                            placeholder="შეიყვანეთ კატეგორიის სახელი" required=""></asp:TextBox>
                                                         <asp:HiddenField ID="hdnId" runat="server" Value="0" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Category Image</label>
+                                                    <label>კატეგორიის სურათი</label>
                                                     <div>
                                                         <asp:FileUpload ID="fuCategoryImage" runat="server" CssClass="form-control"
                                                             onchange="ImagePreview(this);" />
                                                     </div>
                                                 </div>
                                                 <div class="form-check pl-4">
-                                                    <asp:CheckBox ID="cbIsActive" runat="server" Text="&nbsp; IsActive"
+                                                    <asp:CheckBox ID="cbIsActive" runat="server" Text="&nbsp; აქტიურია"
                                                         CssClass="form-check-input" />
                                                 </div>
                                                 <div class="pb-5">
-                                                    <asp:Button ID="btnAddOrUpdate" runat="server" Text="Add" CssClass="btn btn-primary"
+                                                    <asp:Button ID="btnAddOrUpdate" runat="server" Text="დამატება" CssClass="btn btn-primary"
                                                         OnClick="btnAddOrUpdate_Click" />
                                                     &nbsp;
-                                                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary"
+                                                <asp:Button ID="btnClear" runat="server" Text="წაშლა" CssClass="btn btn-primary"
                                                     CausesValidation="false" OnClick="btnClear_Click" />
                                                 </div>
                                                 <div>
@@ -87,7 +87,7 @@
                                         </div>
 
                                         <div class="col-sm-6 col-md-8 col-lg-8 mobile-inputs">
-                                            <h4 class="sub-title">Category Lists</h4>
+                                            <h4 class="sub-title">კატეგორიის სია</h4>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
 
@@ -98,11 +98,11 @@
                                                                 <thead>
 
                                                                     <tr>
-                                                                        <th class="table-plus">Name</th>
-                                                                        <th>Image</th>
-                                                                        <th>IsActive</th>
-                                                                        <th>CreatedDate</th>
-                                                                        <th class="datatable-nosort">Action</th>
+                                                                        <th class="table-plus">სახელი</th>
+                                                                        <th>სურათი</th>
+                                                                        <th>აქტიურია</th>
+                                                                        <th>დამატების თარიღი</th>
+                                                                        <th class="datatable-nosort">მოქმედება</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -118,13 +118,13 @@
                                                                 </td>
                                                                 <td><%# Eval("CreatedDate") %> </td>
                                                                 <td>
-                                                                    <asp:LinkButton ID="lnkEdit" Text="Edit" runat="server" CssClass="badge badge-primary"
+                                                                    <asp:LinkButton ID="lnkEdit" Text="რედაქტირება" runat="server" CssClass="badge badge-primary"
                                                                         CommandArgument='<%# Eval("CategoryId") %>' CommandName="edit">
                                                                         <i class="ti-pencil"></i>
                                                                     </asp:LinkButton>
-                                                                    <asp:LinkButton ID="lnkDelete" Text="Delete" runat="server" CommandName="delete"
+                                                                    <asp:LinkButton ID="lnkDelete" Text="წაშლა" runat="server" CommandName="delete"
                                                                         CssClass="badge bg-danger" CommandArgument='<%# Eval("CategoryId") %>'
-                                                                        OnClientClick="return confirm('do you want to delete this category?');">
+                                                                        OnClientClick="return confirm('ნამდვილად გსურთ წაშალოთ ეს კატეგორია?');">
                                                                         <i class="ti-trash"></i>
                                                                     </asp:LinkButton>
                                                                 </td>

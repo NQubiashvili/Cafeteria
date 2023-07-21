@@ -70,7 +70,7 @@ namespace Cafeteria.User
             dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[7] {
                 new DataColumn("OrderNo", typeof(string)),
-                new DataColumn("ProductId", typeof(int)),
+                new DataColumn("ProductsId", typeof(int)),
                 new DataColumn("Quantity", typeof(int)),
                 new DataColumn("UserId", typeof(int)),
                 new DataColumn("Status", typeof(string)),
@@ -104,7 +104,7 @@ namespace Cafeteria.User
                 dr = cmd.ExecuteReader();
                 while(dr.Read())
                 {
-                    productId = (int)dr["ProductsId"];
+                    productId = (int)dr["ProductId"];
                     quantity = (int)dr["Quantity"];
                     // Update Product Quantity
                     UpdateQuantity(productId, quantity, transaction, con);
@@ -114,13 +114,14 @@ namespace Cafeteria.User
                     DeleteCartItem(productId, transaction, con);
                     // Delete Cart Item End
 
-                    dt.Rows.Add(Utils.GetUniqueId(), productId, quantity, (int)Session["userId"],"Pending", paymentId, Convert.ToDateTime(DateTime.Now));
+                    dt.Rows.Add(Utils.GetUniqueId(), productId, quantity, (int)Session["userId"],"Pending", 
+                        paymentId, Convert.ToDateTime(DateTime.Now));
                 }
                 dr.Close();
                 #endregion Getting Cart Item's
 
                 #region Order Details
-                if(dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0)
                 {
                     cmd = new SqlCommand("Save_Orders", con, transaction);
                     cmd.Parameters.AddWithValue("@tblOrders", dt);
@@ -131,9 +132,9 @@ namespace Cafeteria.User
 
                 transaction.Commit();
                 lblMsg.Visible = true;
-                lblMsg.Text = "Your item order successfull!!!";
+                lblMsg.Text = "Your item order was successful!";
                 lblMsg.CssClass = "alert alert-success";
-                Response.AddHeader("REFRESH", "1;URL=Invoice.aspx?id=" + paymentId);
+                Response.Redirect("Invoice.aspx?id=" + paymentId);
 
             }
             catch (Exception e) 

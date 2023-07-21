@@ -61,7 +61,7 @@ namespace Cafeteria.Admin
                 else
                 {
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Please select .jpg, .jpeg or .png image";
+                    lblMsg.Text = "გთხოვთ აირჩიეთ სწორი სურათის ფორმატი .jpg, .jpeg or .png";
                     lblMsg.CssClass = "alert alert-danger";
                     isValidToExecute = false;
                 }
@@ -78,9 +78,9 @@ namespace Cafeteria.Admin
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    actionName = categoryId == 0 ? "inserted" : "updated";
+                    actionName = categoryId == 0 ? "დაემატა" : "განახლდა";
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Category " + actionName + " successfully!";
+                    lblMsg.Text = "კატეგორია " + actionName + " წარმატებით!";
                     lblMsg.CssClass = "alert alert-success";
                     getCategories();
                     clear();
@@ -89,7 +89,7 @@ namespace Cafeteria.Admin
                 {
                     lblMsg.Visible = true;
                     lblMsg.Text = "Error- " + ex.Message;
-                    lblMsg.CssClass = "alert alert-success";
+                    lblMsg.CssClass = "alert alert-danger";
                 }
                 finally
                 {
@@ -116,7 +116,7 @@ namespace Cafeteria.Admin
             txtName.Text = string.Empty;
             cbIsActive.Checked = false;
             hdnId.Value = "0";
-            btnAddOrUpdate.Text = "Add";
+            btnAddOrUpdate.Text = "დამატება";
             imgCategory.ImageUrl = String.Empty;
         }
 
@@ -145,7 +145,7 @@ namespace Cafeteria.Admin
                 imgCategory.Height = 200;
                 imgCategory.Width = 200;
                 hdnId.Value = dt.Rows[0]["CategoryId"].ToString();
-                btnAddOrUpdate.Text = "Update";
+                btnAddOrUpdate.Text = "განახლება";
                 LinkButton btn = e.Item.FindControl("lnkEdit") as LinkButton;
                 btn.CssClass = "badge badge-warning";
             }
@@ -160,7 +160,7 @@ namespace Cafeteria.Admin
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    lblMsg.Text = "Category Deleted Successfully!";
+                    lblMsg.Text = "კატეგორია წაიშალა წარმატებით!";
                     lblMsg.CssClass = "alert alert-success";
                     getCategories();
                 }
@@ -168,7 +168,7 @@ namespace Cafeteria.Admin
                 {
                     lblMsg.Visible = true;
                     lblMsg.Text = "Error-" + ex.Message;
-                    lblMsg.CssClass = "alert alert-damger";
+                    lblMsg.CssClass = "alert alert-danger";
                 }
                 finally
                 {
@@ -184,12 +184,12 @@ namespace Cafeteria.Admin
                 Label lbl = e.Item.FindControl("lblIsActive") as Label;
                 if (lbl.Text == "True")
                 {
-                    lbl.Text = "Active";
+                    lbl.Text = "აქტიურია";
                     lbl.CssClass = "badge badge-success";
                 }
                 else
                 {
-                    lbl.Text = "In-Ative";
+                    lbl.Text = "არ არის აქტიური";
                     lbl.CssClass = "badge badge-danger";
                 }
             }

@@ -45,8 +45,6 @@ namespace Cafeteria.User
             cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
             cmd.Parameters.AddWithValue("@Mobile", txtMobile.Text.Trim());
             cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-            cmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
-            cmd.Parameters.AddWithValue("@PostCode", txtPostCode.Text.Trim());
             cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
             if (fuUserImage.HasFile)
             {
@@ -62,7 +60,7 @@ namespace Cafeteria.User
                 else
                 {
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Please select .jpg, .jpeg or .png image";
+                    lblMsg.Text = "გთხოვთ აირჩიოთ სწორი სურათის ფორმატი .jpg, .jpeg or .png";
                     lblMsg.CssClass = "alert alert-danger";
                     isValidToExecute = false;
                 }
@@ -81,8 +79,8 @@ namespace Cafeteria.User
                     con.Open();
                     cmd.ExecuteNonQuery();
                     actionName = userId == 0 ?
-                        "registration is successful! <b><a href='Login.aspx'>Click here</a></b> to do login" :
-                        "details updated successfuly! <b><a href='Profile.aspx'>Can check here</a></b>";
+                        "რეგისტრაცია წარმატებით გაიარეთ! <b><a href='Login.aspx'>Click here</a></b> to do login" :
+                        "დეტალები წარმატებით შეიცვალა! <b><a href='Profile.aspx'>Can check here</a></b>";
                     lblMsg.Visible = true;
                     lblMsg.Text = "<b> " + txtUsername.Text.Trim() + "</b>" + actionName;
                     lblMsg.CssClass = "alert alert-success";
@@ -97,7 +95,7 @@ namespace Cafeteria.User
                     if (ex.Message.Contains("Violation of UNIQUE KEY constraint"))
                     {
                         lblMsg.Visible = true;
-                        lblMsg.Text = "<b> " + txtUsername.Text.Trim() + "<b> username already exist, try new one. !";
+                        lblMsg.Text = "<b> " + txtUsername.Text.Trim() + "<b> ასეთი მეტსახელით უკვე არსებობს, სცადეთ სხვა!";
                         lblMsg.CssClass = "alert alert-danger";
                     }
 
@@ -131,8 +129,6 @@ namespace Cafeteria.User
                 txtUsername.Text = dt.Rows[0]["Username"].ToString();
                 txtMobile.Text = dt.Rows[0]["Mobile"].ToString();
                 txtEmail.Text = dt.Rows[0]["Email"].ToString();
-                txtAddress.Text = dt.Rows[0]["Address"].ToString();
-                txtPostCode.Text = dt.Rows[0]["PostCode"].ToString();
                 imgUser.ImageUrl = string.IsNullOrEmpty(dt.Rows[0]["ImageUrl"].ToString())
                     ? "../Images/No_image.png" : "../" + dt.Rows[0]["ImageUrl"].ToString();
                 imgUser.Height = 200;
@@ -142,7 +138,7 @@ namespace Cafeteria.User
                 txtPassword.Text = dt.Rows[0]["Password"].ToString();
             }
             lblHeaderMsg.Text = "<h2>Edit Profile</h2>";
-            btnRegister.Text = "Update";
+            btnRegister.Text = "განახლება";
             lblAlreadyUser.Text = "";
         }
 
@@ -152,8 +148,6 @@ namespace Cafeteria.User
             txtUsername.Text = string.Empty;
             txtMobile.Text = string.Empty;
             txtEmail.Text = string.Empty;
-            txtAddress.Text = string.Empty;
-            txtPostCode.Text = string.Empty;
             txtPassword.Text = string.Empty;
         }
     }

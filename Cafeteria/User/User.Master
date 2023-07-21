@@ -152,11 +152,7 @@
                       <% Response.Write(Session["cartCount"]); %>
                   </span>
               </a>
-              <div class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </div>
+              
               <%--<a href="" class="order_online">
                 Order Online
               </a>--%>
@@ -184,7 +180,7 @@
         <div class="col-md-4 footer-col">
           <div class="footer_contact">
             <h4>
-              Contact Us
+              საკონტაქტო
             </h4>
             <div class="contact_link_box">
               <a href="">
@@ -254,7 +250,9 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
-  <!-- End Google Map -->s
+  <!-- End Google Map -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 </html>

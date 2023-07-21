@@ -27,7 +27,7 @@
         }
     </style>
     <script>
-         /*For disappearing alert message*/
+        /*For disappearing alert message*/
         window.onload = function () {
             var seconds = 5;
             setTimeout(function () {
@@ -42,19 +42,18 @@
 
     <%--Function for preventing back button--%>
     <script type="text/javascript">
-      function DisableBackButton() {
-       window.history.forward()
-      }
-      DisableBackButton();
-       window.onload = DisableBackButton;
-       window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
-        window.onunload = function() { void (0) }
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton;
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onunload = function () { void (0) }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <section class="book_section" style="background-image: url('../Images/payment-bg.png'); width: 100%; height: 100%; background-repeat: no-repeat; 
-        background-size: auto; background-attachment: fixed; background-position: left;">
+    <section class="book_section" style="background-image: url('../Images/payment-bg.png'); width: 100%; height: 100%; background-repeat: no-repeat; background-size: auto; background-attachment: fixed; background-position: left;">
 
         <div class="container py-5">
             <div class="align-self-end">
@@ -197,6 +196,23 @@
                                             ControlToValidate="txtCODAddress" Display="Dynamic" SetFocusOnError="true" ValidationGroup="cod"
                                             Font-Names="Segoe Script"></asp:RequiredFieldValidator>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="ddlTakeawayTime">
+                                            <h6>Takeaway Time</h6>
+                                        </label>
+                                        <select id="reservationTime" name="reservationTime" class="form-control" required>
+                                            <option value="">Select a time</option>
+                                            <% for (int hour = 10; hour <= 22; hour++)
+                                                { %>
+                                            <% for (int minute = 0; minute < 60; minute += 30)
+                                                { %>
+                                            <% string fromTime = $"{hour:00}:{minute:00}";
+                                                string toTime = $"{(hour + (minute + 30) / 60):00}:{(minute + 30) % 60:00}"; %>
+                                            <option value="<%= fromTime %>">From <%= fromTime %> To <%= toTime %></option>
+                                            <% } %>
+                                            <% } %>
+                                        </select>
+                                        </div>
                                     <p>
                                         <asp:LinkButton ID="lbCodSubmit" runat="server" CssClass="btn btn-info" ValidationGroup="cod" OnClick="lbCodSubmit_Click">
                                             <i class="fa fa-cart-arrow-down mr-2"></i>Confirm Order</asp:LinkButton>
@@ -206,8 +222,8 @@
                                     After completing the payment process, you can check your updated order status.
                                     </p>
                                 </div>
-                                <!-- End -->
-                            </div>
+                                    <!-- End -->
+                                </div>
                             <!-- End -->
                         </div>
                         <div class="card-footer">

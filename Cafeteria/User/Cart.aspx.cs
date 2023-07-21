@@ -108,7 +108,7 @@ namespace Cafeteria.User
                             isTrue = true;
                         }
 
-                        if(isTrue)
+                        if (isTrue)
                         {
                             // Update cart item's quantity in DB.
                             isCartUpdated = utils.updateCartQuantity(updatedQuantity, ProductId, Convert.ToInt32(Session["userId"]));
@@ -159,6 +159,7 @@ namespace Cafeteria.User
             }
 
         }
+
 
         protected void rCartItem_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
