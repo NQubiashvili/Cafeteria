@@ -14,6 +14,36 @@
     </script>
 
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function ShowPopup() {
+        // Assuming you have a modal with ID 'verificationModal'
+        $('#verificationModal').modal('show');
+    }
+
+    function VerifyCode() {
+        var enteredCode = $("#txtVerificationCode").val();
+
+        // Assuming you have a method on the server to verify the code
+        PageMethods.VerifyCode(enteredCode, OnVerifyCodeSuccess, OnVerifyCodeFailure);
+    }
+
+    function OnVerifyCodeSuccess(result) {
+        if (result === true) {
+            alert("Verification successful. Registration complete!");
+            window.location.href = "Profile.aspx"; // Redirect to the profile page or any other destination
+        } else {
+            alert("Invalid verification code. Please try again.");
+        }
+    }
+
+    function OnVerifyCodeFailure(error) {
+        alert("Error verifying code: " + error._message);
+    }
+</script>
+
+
 
     <%--Show Image Preview --%>
 
@@ -65,11 +95,17 @@
                     </div>
 
                     <div>
-                            <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="მეილი აუცილებელია" ControlToValidate="txtEmail"
-                                 ForeColor="Red" Display="Dynamic" SetFocusOnError="true"></asp:RequiredFieldValidator>
-                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"  placeholder="შეიყვანეთ მეილი"
-                                ToolTip="Email" TextMode="Email"></asp:TextBox>
-                    </div>
+    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="მეილი აუცილებელია" ControlToValidate="txtEmail"
+        ForeColor="Red" Display="Dynamic" SetFocusOnError="true"></asp:RequiredFieldValidator>
+
+    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="შეიყვანეთ მეილი"
+        ToolTip="Email" TextMode="Email"></asp:TextBox>
+
+    <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="მეილი მხოლოდ pog.gov.ge ან justice.gov.ge მისამართებს შეიძლება"
+        ControlToValidate="txtEmail" ValidationExpression="^[\w-]+(\.[\w-]+)*@(pog\.gov\.ge|justice\.gov\.ge)$"
+        ForeColor="Red" Display="Dynamic" SetFocusOnError="true"></asp:RegularExpressionValidator>
+</div>
+
 
                         
 

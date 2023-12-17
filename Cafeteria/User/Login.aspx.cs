@@ -55,7 +55,7 @@ namespace Cafeteria.User
                 else
                 {
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Invalid Credentials..!";
+                    lblMsg.Text = "მონაცემები არასწორია..!";
                     lblMsg.CssClass = "alert alert-danger";
                 }
             }

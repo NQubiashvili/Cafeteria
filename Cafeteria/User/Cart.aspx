@@ -41,7 +41,7 @@
                             <img width="60" src='<%# Utils.GetImageUrl(Eval("ImageUrl")) %>' alt="" />
                         </td>
                         <td>₾<asp:Label ID="lblPrice" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
-                            <asp:HiddenField ID="hdnProductId" runat="server" Value='<%# Eval("ProductsId") %>' />
+                            <asp:HiddenField ID="hdnProductId" runat="server" Value='<%# Eval("ProductId") %>' />
                             <asp:HiddenField ID="hdnQuantity" runat="server" Value='<%# Eval("Qty") %>' />
                             <asp:HiddenField ID="hdnPrdQuantity" runat="server" Value='<%# Eval("PrdQty") %>' />
                         </td>
@@ -60,7 +60,7 @@
                         </td>
                         <td>₾<asp:Label ID="lblTotalPrice" runat="server"></asp:Label></td>
                         <td>
-                            <asp:LinkButton ID="lbDelete" runat="server" Text="Remove" CommandName="remove" CommandArgument='<%# Eval("ProductsId") %>'
+                            <asp:LinkButton ID="lbDelete" runat="server" Text="Remove" CommandName="remove" CommandArgument='<%# Eval("ProductId") %>'
                                 OnClientClick="return confirm('Do you want to remove this item from cart?')"> <i class="fa fa-close"></i></asp:LinkButton>
                         </td>
                     </tr>

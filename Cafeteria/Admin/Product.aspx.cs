@@ -157,6 +157,7 @@ namespace Cafeteria.Admin
                 txtDescription.Text = dt.Rows[0]["Description"].ToString();
                 txtPrice.Text = dt.Rows[0]["Price"].ToString();
                 txtQuantity.Text = dt.Rows[0]["Quantity"].ToString();
+                txtQuantity.Text = dt.Rows[0]["QuantityUnit"].ToString();
                 ddlCategories.SelectedValue = dt.Rows[0]["CategoryId"].ToString();
                 cbIsActive.Checked = Convert.ToBoolean(dt.Rows[0]["IsActive"]);
                 imgProduct.ImageUrl = string.IsNullOrEmpty(dt.Rows[0]["ImageUrl"].ToString()) ?

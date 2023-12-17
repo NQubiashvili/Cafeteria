@@ -4,9 +4,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.Exchange.WebServices.Data;
 
 namespace Cafeteria.User
 {
@@ -21,7 +24,7 @@ namespace Cafeteria.User
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["id"] != null )/*&& Session["userId"] != null)*/
+                if (Request.QueryString["id"] != null )
                 {
                     getUserDetils();
                 }
@@ -46,6 +49,50 @@ namespace Cafeteria.User
             cmd.Parameters.AddWithValue("@Mobile", txtMobile.Text.Trim());
             cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
             cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+
+            string verificationCode = GenerateRandomCode();
+            Session["VerificationCode"] = verificationCode;
+
+
+            try
+            {
+                ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2013_SP1);
+                service.Credentials = new WebCredentials("nkubiashvili", "Datonika1");
+                service.TraceEnabled = true;
+
+                // Replace "your-exchange-server" with the URL of your Exchange server
+                service.Url = new Uri("https://email.cloud.gov.ge/ews/exchange.asmx");
+
+                // Create the email message
+                EmailMessage email = new EmailMessage(service);
+                email.Subject = "დადასტურების კოდი";
+                email.Body = new MessageBody(BodyType.HTML, $"<p>მადლობა რომ დარეგისტრირდით კაფეტერიაზე.</p> <p>თქვენი ვერიფიკაციის კოდი: {verificationCode}</p>");
+
+                // Add recipient
+                email.ToRecipients.Add(txtEmail.Text.Trim());
+
+                // Send the email
+                email.Send();
+
+                // Display success message or perform additional actions
+                lblMsg.Visible = true;
+                lblMsg.Text = "Registration successful. A welcome email has been sent to your email address.";
+                lblMsg.CssClass = "alert alert-success";
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup();", true);
+            }
+            catch (Exception ex)
+            {
+                // Handle email sending failure
+                lblMsg.Visible = true;
+                lblMsg.Text = "Error sending email: " + ex.Message;
+                lblMsg.CssClass = "alert alert-danger";
+                return;
+            }
+
+            
+
+
             if (fuUserImage.HasFile)
             {
                 if (Utils.IsValidExtension(fuUserImage.FileName))
@@ -95,6 +142,13 @@ namespace Cafeteria.User
                     if (ex.Message.Contains("Violation of UNIQUE KEY constraint"))
                     {
                         lblMsg.Visible = true;
+                        lblMsg.Text = "<b> " + txtEmail.Text.Trim() + "<b> ასეთი მეილი უკვე არსებობს, სცადეთ სხვა!";
+                        lblMsg.CssClass = "alert alert-danger";
+                        return;
+                    }
+                    if (ex.Message.Contains("Violation of UNIQUE KEY constraint"))
+                    {
+                        lblMsg.Visible = true;
                         lblMsg.Text = "<b> " + txtUsername.Text.Trim() + "<b> ასეთი მეტსახელით უკვე არსებობს, სცადეთ სხვა!";
                         lblMsg.CssClass = "alert alert-danger";
                     }
@@ -111,6 +165,22 @@ namespace Cafeteria.User
                     con.Close(); 
                 }
             }
+
+        }
+
+        private string GenerateRandomCode()
+        {
+            Random random = new Random();
+            return random.Next(100000, 999999).ToString();
+        }
+
+        public static bool VerifyCode(string enteredCode)
+        {
+            // Retrieve the stored verification code from a secure location (e.g., session variable)
+            string storedCode = HttpContext.Current.Session["VerificationCode"] as string;
+
+            // Compare the entered code with the stored code
+            return (enteredCode == storedCode);
         }
 
         void getUserDetils()
