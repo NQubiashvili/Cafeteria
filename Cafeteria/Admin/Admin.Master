@@ -200,9 +200,9 @@
                                 <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Product Status</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
-                                        <a href="#">
+                                        <a href="OrderStatus.aspx">
                                             <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Update Status</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">სტატუსის განახლება</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>

@@ -140,9 +140,6 @@
                                                                 </span>
                                                                 Payment Mode: <%# Eval("PaymentMode").ToString() == "cod" ? "Cash On Delivery" : Eval("PaymentMode").ToString().ToUpper() %>
                                                             </div>
-                                                            <div class="col-6" style="text-align:end">
-                                                                <%# string.IsNullOrEmpty(Eval("CardNo").ToString()) ? "" : "Card No:" + Eval("CardNo") %>
-                                                            </div>
                                                             <div class="col-2">
                                                                 <a href="Invoice.aspx?id=<%# Eval("PaymentId") %>" class="btn btn-info btn-sm">
                                                                     <i class="fa fa-download mr-2"></i>ინვოისი</a>

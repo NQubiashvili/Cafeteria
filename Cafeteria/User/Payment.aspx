@@ -62,7 +62,7 @@
             <!-- For demo purpose -->
             <div class="row mb-4">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="display-6">Order Payment</h1>
+                    <h1 class="display-6">შეკვეთის გადახდა</h1>
                 </div>
             </div>
             <!-- End -->
@@ -73,7 +73,7 @@
                             <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                                 <!-- Payment type tabs -->
                                 <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                                    <li class="nav-item"><a data-toggle="pill" href="#COD" class="nav-link active"><i class="fa fa-money mr-2"></i>Cash On Delivery </a></li>
+                                    <li class="nav-item"><a data-toggle="pill" href="#COD" class="nav-link active"><i class="fa fa-money mr-2"></i>ადგილზე გადახდა</a></li>
                                 </ul>
                                 <!-- End -->
                             </div>
@@ -84,20 +84,20 @@
                                     <label for="txtName">
                                                 <h6>სახელი</h6>
                                             </label>
-                                            <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Name is required"
+                                            <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="სახელი აუცილებელია"
                                                 ControlToValidate="txtName" ForeColor="Red" Display="Dynamic" SetFocusOnError="true"
                                                 ValidationGroup="cod">*</asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                                                ErrorMessage="Name must be in characters" ForeColor="Red" Display="Dynamic" SetFocusOnError="true"
+                                                ErrorMessage="სახელი შეიყვანეთ ასოებით" ForeColor="Red" Display="Dynamic" SetFocusOnError="true"
                                                 ValidationExpression="^[a-zA-Z\s]+$" ControlToValidate="txtName" ValidationGroup="cod">*
                                             </asp:RegularExpressionValidator>
-                                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Card Owner Name"></asp:TextBox>
+                                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="სახელი , გვარი"></asp:TextBox>
                                     <label for="txtCODAddress">
                                         <h6>მიტანის ადგილი</h6>
                                     </label>
-                                    <asp:TextBox ID="txtCODAddress" runat="server" CssClass="form-control" placeholder="Delivery Address"
+                                    <asp:TextBox ID="txtCODAddress" runat="server" CssClass="form-control" placeholder="ოთახის ნომერი"
                                         TextMode="MultiLine"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="rfvCODAddress" runat="server" ErrorMessage="Address is required" ForeColor="Red"
+                                    <asp:RequiredFieldValidator ID="rfvCODAddress" runat="server" ErrorMessage="მიტანის ადგილი აუცილებელია" ForeColor="Red"
                                         ControlToValidate="txtCODAddress" Display="Dynamic" SetFocusOnError="true" ValidationGroup="cod"
                                         Font-Names="Segoe Script"></asp:RequiredFieldValidator>
                                 </div>
@@ -106,7 +106,7 @@
                                         <h6>მიტანის დრო</h6>
                                     </label>
                                     <select id="reservationTime" name="reservationTime" class="form-control" required>
-                                        <option value="">აირჩიეთ დრო</option>
+                                        <option value="0">აირჩიეთ დრო</option>
                                         <% for (int hour = 10; hour <= 22; hour++)
                                             { %>
                                         <% for (int minute = 0; minute < 60; minute += 30)
@@ -132,7 +132,7 @@
                         <!-- End -->
                     </div>
                     <div class="card-footer">
-                        <b class="badge badge-success badge-pill shadow-sm">Order Total: ₾ <% Response.Write(Session["grandTotalPrice"]); %> </b>
+                        <b class="badge badge-success badge-pill shadow-sm">შეკვეთის ფასი: ₾ <% Response.Write(Session["grandTotalPrice"]); %> </b>
                         <div class="pt-1">
                             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ValidationGroup="card"
                                 HeaderText="Fix the following errors" Font-Names="Segoe Script" />

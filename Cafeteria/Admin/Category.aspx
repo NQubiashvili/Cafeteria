@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Category.aspx.cs" Inherits="Cafeteria.Admin.Category" %>
+
 <%@ Import Namespace="Cafeteria" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -10,7 +11,7 @@
             var seconds = 5;
             setTimeout(function () {
                 document.getElementById("<%=lblMsg.ClientID %>").style.display = "none";
-        }, seconds * 1000);
+            }, seconds * 1000);
         };
     </script>
 
@@ -92,7 +93,7 @@
                                                 <div class="table-responsive">
 
                                                     <asp:Repeater ID="rCategory" runat="server" OnItemCommand="rCategory_ItemCommand"
-                                                        OnItemDataBound="rCategory_ItemDataBound" >
+                                                        OnItemDataBound="rCategory_ItemDataBound">
                                                         <HeaderTemplate>
                                                             <table class="table data-table-export table-hover nowrap">
                                                                 <thead>
@@ -131,7 +132,7 @@
                                                             </tr>
                                                         </ItemTemplate>
                                                         <FooterTemplate>
-                                                        </tbody>
+                                                            </tbody>
                                                             </table>
                                                         </FooterTemplate>
                                                     </asp:Repeater>
