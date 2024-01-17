@@ -1,7 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User/User.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="Cafeteria.User.Cart" %>
+
 <%@ Import Namespace="Cafeteria" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+    /* Hide the spin buttons for number input */
+    .no-spin::-webkit-inner-spin-button,
+    .no-spin::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .no-spin {
+        /* Firefox */
+        -moz-appearance: textfield;
+    }
+</style>
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -49,8 +66,9 @@
                             <div class="product__details__option">
                                 <div class="quantity">
                                     <div class="pro-qty">
-                                        <asp:TextBox ID="txtQuantity" runat="server" TextMode="Number" Text='<%# Eval("Quantity") %>'>
+                                        <asp:TextBox ID="txtQuantity" runat="server" TextMode="Number" Text='<%# Eval("Quantity") %>' CssClass="no-spin">
                                         </asp:TextBox>
+
                                         <asp:RegularExpressionValidator ID="revQuantity" runat="server" ErrorMessage="*" ForeColor="Red" Font-Size="Small"
                                             ValidationExpression="[1-9]*" ControlToValidate="txtQuantity" Display="Dynamic" SetFocusOnError="true"
                                             EnableClientScript="true"></asp:RegularExpressionValidator>
@@ -69,23 +87,23 @@
                     <tr>
                         <td colspan="3"></td>
                         <td class="pl-lg-5">
-                            <b>Grand Total:-</b>
+                            <b>ჯამური ფასი:-</b>
                         </td>
                         <td>₾<% Response.Write(Session["grandTotalPrice"]); %></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="continue__btn">
-                            <a href="Menu.aspx" class="btn btn-info"> <i class="fa fa-arrow-circle-left mr-2"></i>Continue Shopping</a>
+                            <a href="Menu.aspx" class="btn btn-info"><i class="fa fa-arrow-circle-left mr-2"></i>გააგრძელე შოპინგი</a>
                         </td>
                         <td>
                             <asp:LinkButton ID="lbUpdateCart" runat="server" CommandName="UpdateCart" CssClass="btn btn-warning">
-                                <i class="fa fa-refresh mr-2"></i>Update Cart
+                                <i class="fa fa-refresh mr-2"></i>განაახლე კალათა
                             </asp:LinkButton>
                         </td>
                         <td>
                             <asp:LinkButton ID="lbCheckout" runat="server" CommandName="Checkout" CssClass="btn btn-success">
-                                Checkout<i class="fa fa-arrow-circle-right ml-2"></i>
+                                გადახდა<i class="fa fa-arrow-circle-right ml-2"></i>
                             </asp:LinkButton>
                         </td>
                     </tr>

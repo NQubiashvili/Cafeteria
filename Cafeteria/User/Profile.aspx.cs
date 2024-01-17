@@ -62,7 +62,7 @@ namespace Cafeteria.User
             int sr = 1;
             con = new SqlConnection(Connection.GetConnectionString());
             cmd = new SqlCommand("Invoice", con);
-            cmd.Parameters.AddWithValue("@Action", "ORDERHISTORY");
+            cmd.Parameters.AddWithValue("@Action", "ORDHIST");
             cmd.Parameters.AddWithValue("@UserId", Session["userId"]);
             cmd.CommandType = CommandType.StoredProcedure;
             sda = new SqlDataAdapter(cmd);
@@ -94,8 +94,8 @@ namespace Cafeteria.User
                 Repeater repOrders = e.Item.FindControl("rOrders") as Repeater;
                 con = new SqlConnection(Connection.GetConnectionString());
                 cmd = new SqlCommand("Invoice", con);
-                cmd.Parameters.AddWithValue("@Action", "INVOICEBYID");
-                cmd.Parameters.AddWithValue("@PaymentId", Convert.ToInt32(paymentId.Value));
+                cmd.Parameters.AddWithValue("@Action", "IBID");
+                cmd.Parameters.AddWithValue("@PaymentId", Convert.ToInt32(Request.QueryString["id"]));
                 cmd.Parameters.AddWithValue("@UserId", Session["userId"]);
                 cmd.CommandType = CommandType.StoredProcedure;
                 sda = new SqlDataAdapter(cmd);

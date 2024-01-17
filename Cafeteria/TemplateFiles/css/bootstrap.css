@@ -5009,8 +5009,8 @@ a.badge-success:focus, a.badge-success.focus {
 }
 
 .badge-info {
-  color: #fff;
-  background-color: #17a2b8;
+    color: #ffffff;
+    background-color: #1563C1;
 }
 
 a.badge-info:hover, a.badge-info:focus {
@@ -6548,13 +6548,14 @@ button.bg-info:focus {
 }
 
 .bg-warning {
-  background-color: #ffc107 !important;
+    background-color: #104C94 !important;
+    color: #fff;
 }
 
 a.bg-warning:hover, a.bg-warning:focus,
 button.bg-warning:hover,
 button.bg-warning:focus {
-  background-color: #d39e00 !important;
+    background-color: #104C94 !important;
 }
 
 .bg-danger {

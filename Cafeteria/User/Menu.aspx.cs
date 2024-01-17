@@ -20,11 +20,13 @@ namespace Cafeteria.User
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) 
+            if (!IsPostBack)
             {
                 getCategories();
                 getProducts();
+                
             }
+           
         }
 
         private void getCategories()
@@ -52,16 +54,23 @@ namespace Cafeteria.User
             rProducts.DataSource = dt;
             rProducts.DataBind();
         }
-
+      
         protected void rProducts_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (Session["userId"] != null)
             {
                 bool isCartItemUpdated = false;
-                int i = isItemExistInCart(Convert.ToInt32(e.CommandArgument));
-                if(i == 0)
+                int existingQuantity = GetCartItemQuantity(Convert.ToInt32(e.CommandArgument));
+
+                if (existingQuantity > 0)
                 {
-                    //Adding new item in cart
+                    // Update the existing item's quantity in the cart
+                    Utils utils = new Utils();
+                    isCartItemUpdated = utils.updateCartQuantity(existingQuantity, Convert.ToInt32(e.CommandArgument), Convert.ToInt32(Session["userId"]));
+                }
+                else
+                {
+                    // Add a new item to the cart
                     con = new SqlConnection(Connection.GetConnectionString());
                     cmd = new SqlCommand("Cart_Crud", con);
                     cmd.Parameters.AddWithValue("@Action", "INSERT");
@@ -69,12 +78,13 @@ namespace Cafeteria.User
                     cmd.Parameters.AddWithValue("@Quantity", 1);
                     cmd.Parameters.AddWithValue("@UserId", Session["userId"]);
                     cmd.CommandType = CommandType.StoredProcedure;
+
                     try
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Response.Write("<script>alert('Error - " + ex.Message + "')<script>");
                     }
@@ -83,13 +93,7 @@ namespace Cafeteria.User
                         con.Close();
                     }
                 }
-                else
-                {
-                    //Adding exsisting item into cart
-                    Utils utils = new Utils();
-                    isCartItemUpdated = utils.updateCartQuantity(i + 1,Convert.ToInt32(e.CommandArgument), Convert.ToInt32(Session["userId"]));
-                    
-                }
+
                 lblMsg.Visible = true;
                 lblMsg.Text = "Item added successfully in your cart!";
                 lblMsg.CssClass = "alert alert-success";
@@ -101,7 +105,7 @@ namespace Cafeteria.User
             }
         }
 
-        int isItemExistInCart(int productId)
+        int GetCartItemQuantity(int productId)
         {
             con = new SqlConnection(Connection.GetConnectionString());
             cmd = new SqlCommand("Cart_Crud", con);
@@ -109,15 +113,21 @@ namespace Cafeteria.User
             cmd.Parameters.AddWithValue("@ProductId", productId);
             cmd.Parameters.AddWithValue("@UserId", Session["userId"]);
             cmd.CommandType = CommandType.StoredProcedure;
+
             sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
+            sda.Fill(dt);
+
             int quantity = 0;
-            if(dt.Rows.Count > 0) 
+
+            if (dt.Rows.Count > 0)
             {
                 quantity = Convert.ToInt32(dt.Rows[0]["Quantity"]);
             }
+
             return quantity;
         }
+
 
         //public string LowerCase(Object obj)
         //{

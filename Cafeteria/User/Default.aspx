@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <!-- offer section -->
+   <%-- <!-- offer section -->
 
     <section class="offer_section layout_padding-bottom">
         <div class="container">
@@ -97,7 +97,7 @@
             </div>
     </section>
 
-    <!-- end offer section -->
+    <!-- end offer section -->--%>
 
 
     <!-- about section -->
@@ -118,7 +118,7 @@
                             </h2>
                         </div>
                         <p>
-                            აქაც რამე ჩაიწერება ან მოიშლება
+                            <a href="Menu.aspx?id=<%# Eval("CategoryId") %>">შეგაწუხა შიმშილმა?</a>
                         </p>
                     </div>
                 </div>

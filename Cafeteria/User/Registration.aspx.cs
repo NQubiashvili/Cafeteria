@@ -24,7 +24,7 @@ namespace Cafeteria.User
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["id"] != null )
+                if (Request.QueryString["id"] != null)
                 {
                     getUserDetils();
                 }
@@ -51,7 +51,6 @@ namespace Cafeteria.User
             cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
 
             string verificationCode = GenerateRandomCode();
-            Session["VerificationCode"] = verificationCode;
 
 
             try
@@ -78,8 +77,6 @@ namespace Cafeteria.User
                 lblMsg.Visible = true;
                 lblMsg.Text = "Registration successful. A welcome email has been sent to your email address.";
                 lblMsg.CssClass = "alert alert-success";
-
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup();", true);
             }
             catch (Exception ex)
             {
@@ -90,7 +87,7 @@ namespace Cafeteria.User
                 return;
             }
 
-            
+
 
 
             if (fuUserImage.HasFile)
@@ -137,7 +134,7 @@ namespace Cafeteria.User
                     }
                     clear();
                 }
-                catch(SqlException ex)
+                catch (SqlException ex)
                 {
                     if (ex.Message.Contains("Violation of UNIQUE KEY constraint"))
                     {
@@ -160,12 +157,16 @@ namespace Cafeteria.User
                     lblMsg.Text = "Error-" + ex.Message;
                     lblMsg.CssClass = "alert alert-danger";
                 }
-                finally 
-                { 
-                    con.Close(); 
+                finally
+                {
+                    con.Close();
                 }
             }
 
+            Session["VerificationCode"] = verificationCode;
+
+            // Display a popup window for code verification
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "ShowPopup();", true);
         }
 
         private string GenerateRandomCode()

@@ -12,6 +12,8 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
 using System.Net;
+using Cafeteria.Admin;
+using System.Windows.Forms;
 
 
 namespace Cafeteria.User
@@ -23,7 +25,8 @@ namespace Cafeteria.User
         SqlCommand cmd;
         SqlDataAdapter sda;
         DataTable dt;
-
+        [STAThread]
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,6 +37,7 @@ namespace Cafeteria.User
                     {
                         rOrderItem.DataSource = GetOrderDetails();
                         rOrderItem.DataBind();
+                        
                     }
                 }
                 else
@@ -41,6 +45,7 @@ namespace Cafeteria.User
                     Response.Redirect("Login.aspx");
                 }
             }
+
         }
 
         DataTable GetOrderDetails()
@@ -48,44 +53,66 @@ namespace Cafeteria.User
             double grandTotal = 0;
             con = new SqlConnection(Connection.GetConnectionString());
             cmd = new SqlCommand("Invoice", con);
-            cmd.Parameters.AddWithValue("@Action", "INVOICEBYID");
+            cmd.Parameters.AddWithValue("@Action", "IBID");
             cmd.Parameters.AddWithValue("@PaymentId", Convert.ToInt32(Request.QueryString["id"]));
             cmd.Parameters.AddWithValue("@UserId", Session["userId"]);
             cmd.CommandType = CommandType.StoredProcedure;
             sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);
+
+
             if (dt.Rows.Count > 0)
             {
-                foreach(DataRow drow in dt.Rows)
+                foreach (DataRow drow in dt.Rows)
                 {
                     grandTotal += Convert.ToDouble(drow["TotalPrice"]);
                 }
             }
-            DataRow dr = dt.NewRow();
-            dr["TotalPrice"] = grandTotal;
-            dt.Rows.Add(dr);
+
+            // Clear existing rows
+            //dt.Rows.Clear();
+
+            // Add a new row with the calculated grandTotal
+            //DataRow dr = dt.NewRow();
+            // dr["TotalPrice"] = grandTotal;
+            //dt.Rows.Add(dr);
+
             return dt;
+
         }
+
+      
+
 
         protected void lbDownloadInvoice_Click(object sender, EventArgs e)
         {
             try
             {
-                string downloadPath = @"E:\order_Invoice.pdf";
-                DataTable dtbl = GetOrderDetails();
-                ExportToPdf(dtbl, downloadPath, "Order Invoice");
+                // Show SaveFileDialog to allow the user to choose the download path
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = "PDF Files|*.pdf";
+                saveDialog.Title = "Save PDF File";
+                saveDialog.FileName = "Cafeteria_Invoice.pdf"; // Default file name
 
-                WebClient client = new WebClient();
-                Byte[] buffer = client.DownloadData(downloadPath);
-                if (buffer != null)
+                if (saveDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Response.ContentType = "application/pdf";
-                    Response.AddHeader("content-length", buffer.Length.ToString());
-                    Response.BinaryWrite(buffer);
+                    string downloadPath = saveDialog.FileName;
+
+                    DataTable dtbl = GetOrderDetails();
+                    ExportToPdf(dtbl, downloadPath, "Order Invoice");
+
+                    WebClient client = new WebClient();
+                    byte[] buffer = client.DownloadData(downloadPath);
+                    if (buffer != null)
+                    {
+                        Response.ContentType = "application/pdf";
+                        Response.AddHeader("content-length", buffer.Length.ToString());
+                        Response.BinaryWrite(buffer);
+                    }
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 lblMsg.Visible = true;
                 lblMsg.Text = "Error Message:- " + ex.Message.ToString();
@@ -100,35 +127,36 @@ namespace Cafeteria.User
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
 
-            //Report Header
-            BaseFont bfntHead = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            Font fntHead = new Font(bfntHead, 16, 1, Color.GRAY);
+            // Load Georgian font
+            BaseFont bfGeorgian = BaseFont.CreateFont(@"../TemplateFiles/fonts/FiraGO-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+            // Report Header
+            Font fntHead = new Font(bfGeorgian, 16, 1, Color.GRAY);
             Paragraph prgHeading = new Paragraph();
             prgHeading.Alignment = Element.ALIGN_CENTER;
             prgHeading.Add(new Chunk(strHeader.ToUpper(), fntHead));
             document.Add(prgHeading);
 
-            //Author
+            // Author
             Paragraph prgAuthor = new Paragraph();
-            BaseFont btnAuthor = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            Font fntAuthor = new Font(btnAuthor, 8, 2, Color.GRAY);
+            Font fntAuthor = new Font(bfGeorgian, 8, 2, Color.GRAY);
             prgAuthor.Alignment = Element.ALIGN_RIGHT;
             prgAuthor.Add(new Chunk("Order From : Cafeteria Fast Food", fntAuthor));
             prgAuthor.Add(new Chunk("\nOrder Date : " + dtblTable.Rows[0]["OrderDate"].ToString(), fntAuthor));
             document.Add(prgAuthor);
 
-            //Add a line seperation
+            // Add a line separation
             Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, Color.BLACK, Element.ALIGN_LEFT, 1)));
             document.Add(p);
 
-            //Add line break
+            // Add line break
             document.Add(new Chunk("\n", fntHead));
 
-            //Write the table
+            // Write the table
             PdfPTable table = new PdfPTable(dtblTable.Columns.Count - 2);
-            //Table header
-            BaseFont btnColumnHeader = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            Font fntColumnHeader = new Font(btnColumnHeader, 9, 1, Color.WHITE);
+
+            // Table header
+            Font fntColumnHeader = new Font(bfGeorgian, 9, 1, Color.WHITE);
             for (int i = 0; i < dtblTable.Columns.Count - 2; i++)
             {
                 PdfPCell cell = new PdfPCell();
@@ -136,8 +164,9 @@ namespace Cafeteria.User
                 cell.AddElement(new Chunk(dtblTable.Columns[i].ColumnName.ToUpper(), fntColumnHeader));
                 table.AddCell(cell);
             }
-            //table Data
-            Font fntColumnData = new Font(btnColumnHeader, 8, 1, Color.BLACK);
+
+            // Table Data
+            Font fntColumnData = new Font(bfGeorgian, 8, 1, Color.BLACK);
             for (int i = 0; i < dtblTable.Rows.Count; i++)
             {
                 for (int j = 0; j < dtblTable.Columns.Count - 2; j++)
@@ -153,5 +182,7 @@ namespace Cafeteria.User
             writer.Close();
             fs.Close();
         }
+
+
     }
 }

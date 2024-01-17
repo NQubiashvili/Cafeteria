@@ -122,6 +122,7 @@ namespace Cafeteria.User
             {
                 bool isTrue = false;
                 string pName = string.Empty;
+                string pQuantity = string.Empty;
                 // First will check item quantity
                 for (int item = 0; item < rCartItem.Items.Count; item++)
                 {
@@ -142,6 +143,7 @@ namespace Cafeteria.User
                         {
                             isTrue = false;
                             pName = productName.Text.ToString();
+                            pQuantity = productQuantity.ToString();
                             break;
                         }
                     }
@@ -153,7 +155,7 @@ namespace Cafeteria.User
                 else
                 {
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Item <b>'" + pName + "'</b> is out of stock :(";
+                    lblMsg.Text = "Item <b>'" + pName + "'</b> არ არის მარაგში :(" + "დარჩენილია <b>'" + pQuantity + "'</b> ერთეული" ;
                     lblMsg.CssClass = "alert alert-success";
                 }
             }
@@ -189,7 +191,7 @@ namespace Cafeteria.User
             {
                 if(ListItemType == ListItemType.Footer)
                 {
-                    var footer = new LiteralControl("<tr><td colspan='5'><b>Your Cart Is empty.</b><a href='Menu.aspx' class='badge badge-info ml-2'>Continue Shopping</a></td><tr></tbody></table>");
+                    var footer = new LiteralControl("<tr><td colspan='5'><b>თქვენი კალათა ცარიელია.</b><a href='Menu.aspx' class='badge badge-info ml-2'>გააგრძელეთ შოპინგი</a></td><tr></tbody></table>");
                     container.Controls.Add(footer);
                 }
             }

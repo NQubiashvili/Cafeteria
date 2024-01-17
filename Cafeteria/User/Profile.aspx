@@ -136,12 +136,8 @@
                                                         <div class="row pt-1 pb-1" style="background-color:lightgray">
                                                             <div class="col-4">
                                                                 <span class="badge badge-pill badge-danger text-white">
-                                                                    <%# Eval("SrNo") %>
+                                                                    <%# Eval("Srno") %>
                                                                 </span>
-                                                                Payment Mode: <%# Eval("PaymentMode").ToString() == "cod" ? "Cash On Delivery" : Eval("PaymentMode").ToString().ToUpper() %>
-                                                            </div>
-                                                            <div class="col-6" style="text-align:end">
-                                                                <%# string.IsNullOrEmpty(Eval("CardNo").ToString()) ? "" : "Card No:" + Eval("CardNo") %>
                                                             </div>
                                                             <div class="col-2">
                                                                 <a href="Invoice.aspx?id=<%# Eval("PaymentId") %>" class="btn btn-info btn-sm">

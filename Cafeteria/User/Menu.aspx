@@ -30,7 +30,7 @@
 
             <div class="filters-content">
                 <div class="row grid">
-                    <asp:Repeater ID="rProducts" runat="server" OnItemCommand="rProducts_ItemCommand">
+                    <asp:Repeater ID="rProducts" runat="server" OnItemCommand="rProducts_ItemCommand" >
                         <ItemTemplate>
                             <div class="col-sm-6 col-lg-4 all <%# Eval("CategoryName").ToString().ToLower() %>">
                                 <div class="box">

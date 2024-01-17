@@ -8,7 +8,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 
-
 namespace Cafeteria.Admin
 {
     public partial class Product : System.Web.UI.Page
@@ -23,12 +22,6 @@ namespace Cafeteria.Admin
         {
             if (!IsPostBack)
             {
-
-                ddlQuantityUnit.Items.Add(new ListItem("გრამი", "გრ."));
-                ddlQuantityUnit.Items.Add(new ListItem("მილილიტრი", "მლ."));
-                ddlQuantityUnit.Items.Add(new ListItem("ლიტრი", "ლ."));
-                ddlQuantityUnit.Items.Add(new ListItem("ნაჭერი", "ნაჭ."));
-
                 Session["breadCrum"] = "Product";
                 if (Session["admin"] == null)
                 {
@@ -55,7 +48,6 @@ namespace Cafeteria.Admin
             cmd.Parameters.AddWithValue("@Description", txtDescription.Text.Trim());
             cmd.Parameters.AddWithValue("@Price", txtPrice.Text.Trim());
             cmd.Parameters.AddWithValue("@Quantity", txtQuantity.Text.Trim());
-            cmd.Parameters.AddWithValue("@QuantityUnit", ddlQuantityUnit.Text.Trim());
             cmd.Parameters.AddWithValue("@CategoryId", ddlCategories.SelectedValue);
             cmd.Parameters.AddWithValue("@IsActive", cbIsActive.Checked);
             if (fuProductImage.HasFile)
@@ -73,7 +65,7 @@ namespace Cafeteria.Admin
                 else
                 {
                     lblMsg.Visible = true;
-                    lblMsg.Text = "აარჩიეთ სწორი სურათის ფორმატი .jpg, .jpeg or .png";
+                    lblMsg.Text = "Please select .jpg, .jpeg or .png image";
                     lblMsg.CssClass = "alert alert-danger";
                     isValidToExecute = false;
                 }
@@ -90,9 +82,9 @@ namespace Cafeteria.Admin
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    actionName = ProductId == 0 ? "დაემატა" : "განახლდა";
+                    actionName = ProductId == 0 ? "inserted" : "updated";
                     lblMsg.Visible = true;
-                    lblMsg.Text = "პროდუქტი " + actionName + " წარმატებით!";
+                    lblMsg.Text = "Product " + actionName + " successfull!";
                     lblMsg.CssClass = "alert alert-success";
                     getProducts();
                     clear();
@@ -101,14 +93,13 @@ namespace Cafeteria.Admin
                 {
                     lblMsg.Visible = true;
                     lblMsg.Text = "Error- " + ex.Message;
-                    lblMsg.CssClass = "alert alert-danger";
+                    lblMsg.CssClass = "alert alert-success";
                 }
                 finally
                 {
                     con.Close();
                 }
             }
-
         }
         private void getProducts()
         {
@@ -157,7 +148,6 @@ namespace Cafeteria.Admin
                 txtDescription.Text = dt.Rows[0]["Description"].ToString();
                 txtPrice.Text = dt.Rows[0]["Price"].ToString();
                 txtQuantity.Text = dt.Rows[0]["Quantity"].ToString();
-                txtQuantity.Text = dt.Rows[0]["QuantityUnit"].ToString();
                 ddlCategories.SelectedValue = dt.Rows[0]["CategoryId"].ToString();
                 cbIsActive.Checked = Convert.ToBoolean(dt.Rows[0]["IsActive"]);
                 imgProduct.ImageUrl = string.IsNullOrEmpty(dt.Rows[0]["ImageUrl"].ToString()) ?
@@ -165,7 +155,7 @@ namespace Cafeteria.Admin
                 imgProduct.Height = 200;
                 imgProduct.Width = 200;
                 hdnId.Value = dt.Rows[0]["ProductId"].ToString();
-                btnAddOrUpdate.Text = "განახლება";
+                btnAddOrUpdate.Text = "Update";
                 LinkButton btn = e.Item.FindControl("lnkEdit") as LinkButton;
                 btn.CssClass = "badge badge-warning";
             }
@@ -180,7 +170,7 @@ namespace Cafeteria.Admin
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    lblMsg.Text = "კატეგორია წაიშალა წარმატებით!";
+                    lblMsg.Text = "Category Deleted Successfully!";
                     lblMsg.CssClass = "alert alert-success";
                     getProducts();
                 }
@@ -205,26 +195,26 @@ namespace Cafeteria.Admin
                 Label lblQuantity = e.Item.FindControl("lblQuantity") as Label;
                 if (lblIsActive.Text == "True")
                 {
-                    lblIsActive.Text = "აქტიურია";
+                    lblIsActive.Text = "Active";
                     lblIsActive.CssClass = "badge badge-success";
                 }
                 else
                 {
-                    lblIsActive.Text = "არ არის აქტიური";
+                    lblIsActive.Text = "In-Active";
                     lblIsActive.CssClass = "badge badge-danger";
                 }
 
                 if (Convert.ToInt32(lblQuantity.Text) <= 5)
                 {
                     lblQuantity.CssClass = "badge badge-danger";
-                    lblQuantity.ToolTip = "პროდუქტი მალე ამოიწურება'!";
+                    lblQuantity.ToolTip = "Item about to be 'out of stock'!";
                 }
             }
         }
 
         protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
         {
-            
+
         }
     }
 }

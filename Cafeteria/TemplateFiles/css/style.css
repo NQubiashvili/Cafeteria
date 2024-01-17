@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans","FiraGO-Bold" , FiraGO ,sans-serif;
     color: #0c0c0c;
     background-color: #ffffff;
     overflow-x: hidden;
@@ -189,11 +189,22 @@ a:focus {
     padding: 15px 0;
 }
 
+#time {
+    font-family: "FiraGO Bold";
+    color: #cbcbcb;
+    text-align: right;
+    display: flex;
+    padding: 15px 15px;
+    align-self: center;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
     .header_section .container-fluid {
         padding-right: 25px;
         padding-left: 25px;
     }
-
 .navbar-brand {
     font-family: 'Dancing Script', cursive;
 }
@@ -204,26 +215,29 @@ a:focus {
         color: #ffffff;
     }
 
-.custom_nav-container {
-    padding: 0;
-}
+
+        .custom_nav-container {
+            padding: 0;
+        }
 
     .custom_nav-container .navbar-nav {
         padding-left: 18%;
     }
 
         .custom_nav-container .navbar-nav .nav-item .nav-link {
+            font-family: "FiraGO Bold";
             padding: 5px 20px;
             color: #ffffff;
             text-align: center;
             text-transform: uppercase;
-            border-radius: 5px;
+            border-radius: 45px;
             -webkit-transition: all 0.3s;
             transition: all 0.3s;
         }
 
         .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-            color: #ffbe33;
+            background-color: #104C94;
+            color: #ffffff;
         }
 
     .custom_nav-container .nav_search-btn {
@@ -253,11 +267,16 @@ a:focus {
     }
 
     .user_option .user_link {
+        display: inline-block;
+        padding: 5px 15px;
         color: #ffffff;
+        -webkit-transition: all 0.3s;
+        border-radius: 45px;
     }
 
         .user_option .user_link:hover {
-            color: #ffbe33;
+            background-color: #104C94;
+            color: #ffffff;
         }
 
     .user_option .cart_link {
@@ -270,23 +289,27 @@ a:focus {
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+        color: #ffffff;
     }
 
         .user_option .cart_link svg {
-            width: 17px;
-            height: auto;
-            fill: #ffffff;
-            margin-bottom: 2px;
+            fill:white;
+            width: 26px;
+            padding: 5px 5px;
+            position:relative;
         }
 
         .user_option .cart_link:hover svg {
-            fill: #ffbe33;
+            border-radius: 45px;
+            background-color: #104C94;
+            color: #ffffff;
         }
 
     .user_option .order_online {
+        font-family: "FiraGO Bold";
         display: inline-block;
         padding: 8px 30px;
-        background-color: #ffbe33;
+        /*background-color: #ffffff;*/
         color: #ffffff;
         border-radius: 45px;
         -webkit-transition: all 0.3s;
@@ -295,7 +318,8 @@ a:focus {
     }
 
         .user_option .order_online:hover {
-            background-color: #e69c00;
+            background-color: #104C94;
+            color:#ffffff;
         }
 
 .custom_nav-container .navbar-toggler {
@@ -401,7 +425,7 @@ a:focus {
         .slider_section .detail-box a {
             display: inline-block;
             padding: 10px 45px;
-            background-color: #ffbe33;
+            background-color: #1563C1;
             color: #ffffff;
             border-radius: 45px;
             -webkit-transition: all 0.3s;
@@ -411,7 +435,8 @@ a:focus {
         }
 
             .slider_section .detail-box a:hover {
-                background-color: #e69c00;
+                background-color: #104C94;
+                color: #ffffff;
             }
 
     .slider_section .img-box img {
@@ -440,7 +465,7 @@ a:focus {
             .slider_section .carousel-indicators li.active {
                 width: 20px;
                 height: 20px;
-                background-color: #ffbe33;
+                background-color: #104C94;
             }
 
 .offer_section {
@@ -539,13 +564,14 @@ a:focus {
 }
 
     .food_section .filters_menu li {
+        font-family:FiraGo;
         padding: 7px 25px;
         cursor: pointer;
         border-radius: 25px;
     }
 
         .food_section .filters_menu li.active {
-            background-color: #222831;
+            background-color: #104C94;
             color: #ffffff;
         }
 
@@ -613,7 +639,7 @@ a:focus {
             width: 40px;
             height: 40px;
             border-radius: 100%;
-            background: #ffbe33;
+            background: #1563C1;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -623,6 +649,9 @@ a:focus {
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
+        }
+        .food_section .box .options:hover a {
+            background: #104C94;
         }
 
             .food_section .box .options a svg {
@@ -696,7 +725,7 @@ a:focus {
     .about_section .detail-box a {
         display: inline-block;
         padding: 10px 45px;
-        background-color: #ffbe33;
+        background-color: #1563C1;
         color: #ffffff;
         border-radius: 45px;
         -webkit-transition: all 0.3s;
@@ -706,7 +735,8 @@ a:focus {
     }
 
         .about_section .detail-box a:hover {
-            background-color: #e69c00;
+            background-color: #104C94;
+            color: #ffffff;
         }
 
 .book_section {
@@ -947,8 +977,8 @@ a:focus {
 
 /* footer section*/
 .footer_section {
-    background-color: #222831;
-    color: #ffffff;
+    background-color: #1A1A1A;
+    color: #FFFFF1;
     padding: 75px 0 40px 0;
     text-align: center;
 }
@@ -964,9 +994,13 @@ a:focus {
         font-family: 'Dancing Script', cursive;
     }
 
-    .footer_section p {
-        color: #dbdbdb;
-    }
+        .footer_section .footer-logo:hover {
+            color: #1563C1;
+        }
+
+        .footer_section p {
+            color: #dbdbdb;
+        }
 
     .footer_section .footer-col {
         margin-bottom: 30px;
@@ -992,7 +1026,7 @@ a:focus {
             }
 
             .footer_section .footer_contact .contact_link_box a:hover {
-                color: #ffbe33;
+                color: #1563C1;
             }
 
     .footer_section .footer-logo {
@@ -1035,7 +1069,7 @@ a:focus {
         }
 
             .footer_section .footer_social a:hover {
-                color: #ffbe33;
+                color: #1563C1;
             }
 
     .footer_section .footer-info {
@@ -1052,3 +1086,7 @@ a:focus {
                 color: inherit;
             }
 /*# sourceMappingURL=style.css.map */
+    .footer_section .footer-logo img {
+        height: 170px;
+        margin-top: 10px;
+    }

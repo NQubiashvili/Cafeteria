@@ -106,10 +106,28 @@
                                                             ErrorMessage="მარაგი უნდა იყოს დადებითი რიცხვი" ForeColor="Red" Display="Dynamic"
                                                             SetFocusOnError="true" ControlToValidate="txtQuantity"
                                                             ValidationExpression="^([1-9]\d*|0)$"></asp:RegularExpressionValidator>
-                                                        <asp:DropDownList ID="ddlQuantityUnit" runat="server" CssClass="form-control">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>ერთეულის რაოდენობა</label>
+                                                    <div class="input-group">
+                                                        <asp:TextBox ID="txtUnit" runat="server" CssClass="form-control"
+                                                            placeholder="შეიყვანეთ ერთეული პროდუქტის რაოდენობა"></asp:TextBox>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                                                            ErrorMessage="ერთეული პროდუქტის რაოდენობის შეყვანა აუცილებელია" ForeColor="Red" Display="Dynamic"
+                                                            SetFocusOnError="true" ControlToValidate="txtUnit"></asp:RequiredFieldValidator>
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
+                                                            ErrorMessage="რაოდენობა უნდა იყოს დადებითი რიცხვი" ForeColor="Red" Display="Dynamic"
+                                                            SetFocusOnError="true" ControlToValidate="txtUnit"
+                                                            ValidationExpression="^([1-9]\d*|0)$"></asp:RegularExpressionValidator>
+                                                        <asp:DropDownList ID="ddlQuantityUnit" runat="server" CssClass="form-control"
+                                                            Style="max-width: 150px;">
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
+
 
                                                 <div class="form-group">
                                                     <label>პროდუქტის სურათი</label>
@@ -124,14 +142,14 @@
                                                     <div>
                                                         <asp:DropDownList ID="ddlCategories" runat="server" CssClass="form-control"
                                                             DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="CategoryId"
-                                                            AppendDataBoundItems="true">
+                                                            AppendDataBoundItems="True">
                                                             <asp:ListItem Value="0">აირჩიეთ კატეგორია</asp:ListItem>
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
                                                             ErrorMessage="კატეგორიის არჩევა აუცილებელია" ForeColor="Red" Display="Dynamic"
                                                             SetFocusOnError="true" ControlToValidate="ddlCategories" InitialValue="">
                                                         </asp:RequiredFieldValidator>
-                                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" OnSelecting="SqlDataSource1_Selecting" ConnectionString="<%$ ConnectionStrings:cs %>" SelectCommand="SELECT [CategoryId], [Name] FROM [Categories]"></asp:SqlDataSource>
+                                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server"  ConnectionString="<%$ ConnectionStrings:CafetDBConnectionString %>" SelectCommand="SELECT [CategoryId], [Name] FROM [Categories]" ProviderName="<%$ ConnectionStrings:CafetDBConnectionString.ProviderName %>"></asp:SqlDataSource>
                                                     </div>
                                                 </div>
 
@@ -168,7 +186,8 @@
                                                                         <th>სურათი</th>
                                                                         <th>ფასი(₾)</th>
                                                                         <th>რაოდენობა</th>
-                                                                        <th>ერთეული</th>
+                                                                        <th>ერთ. რაოდენობა</th>
+                                                                        <th>ერთ.</th>
                                                                         <th>კატეგორიები</th>
                                                                         <th>აქტიურია</th>
                                                                         <th>აღწერა</th>
@@ -187,6 +206,9 @@
                                                                 <td><%# Eval("Price") %> </td>
                                                                 <td>
                                                                     <asp:Label ID="lblQuantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:Label ID="lblUnit" runat="server" Text='<%# Eval("Unit") %>'></asp:Label>
                                                                 </td>
                                                                 <td>
                                                                     <asp:Label ID="lblQuantityUnit" runat="server" Text='<%# Eval("QuantityUnit") %>'></asp:Label>

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Cafeteria.User
 {
@@ -18,7 +13,8 @@ namespace Cafeteria.User
         SqlDataReader dr, dr1;
         DataTable dt;
         SqlTransaction transaction = null;
-        string _address = string.Empty; string _paymentMode = string.Empty;
+        string _address = string.Empty; string _paymentMode = string.Empty; string _name; string _TakeawayTime = string.Empty; 
+        string _CashAmount = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,32 +27,38 @@ namespace Cafeteria.User
             }
         }
 
-        //protected void lbCardSubmit_Click(object sender, EventArgs e)
-        //{
-        //    _name = txtName.Text.Trim();
-        //    _cardNo = txtCardNo.Text.Trim();
-        //    _cardNo = string.Format("************{0}", txtCardNo.Text.Trim().Substring(12, 4));
-        //    _expiryDate = txtExpMonth.Text.Trim() + "/" + txtExpYear.Text.Trim();
-        //    _cvv = txtCvv.Text.Trim();
-        //    _address = txtAddress.Text.Trim();
-        //    _paymentMode = "card";
-        //    if (Session["userId"] != null)
-        //    {
-        //        OrderPayment(_name, _cardNo, _expiryDate, _cvv, _address, _paymentMode);
-        //    }
-        //    else
-        //    {
-        //        Response.Redirect("Login.aspx");
-        //    }
-        //}
+
+
+
+        /*protected void lbCardSubmit_Click(object sender, EventArgs e)
+        {
+            _name = txtName.Text.Trim();
+            _address = txtAddress.Text.Trim();
+            _paymentMode = "card";
+            _TakeawayTime = ddlTakeawayTime.Text.Trim();
+
+
+            if (Session["userId"] != null)
+            {
+                OrderPayment(_name, _address, _paymentMode, _TakeawayTime, _CashAmount);
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }*/
 
         protected void lbCodSubmit_Click(object sender, EventArgs e)
         {
+            _name = txtName.Text.Trim();
             _address = txtCODAddress.Text.Trim();
             _paymentMode = "cod";
+            _TakeawayTime = ddlTakeawayTime.SelectedItem.Text;
+            _CashAmount = txtCustomAmount.Text.Trim();
+
             if (Session["userId"] != null)
             {
-                OrderPayment(_address, _paymentMode);
+                OrderPayment(_name, _address, _paymentMode, _TakeawayTime, _CashAmount);
             }
             else
             {
@@ -64,7 +66,9 @@ namespace Cafeteria.User
             }
         }
 
-        void OrderPayment(string address, string paymentMode)
+
+
+        void OrderPayment(string name, string address, string paymentMode, string takeawayTime, string cashAmount)
         {
             int paymentId;
             int productId;
@@ -88,8 +92,11 @@ namespace Cafeteria.User
             transaction = con.BeginTransaction();
             cmd = new SqlCommand("Save_Payment", con, transaction);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Name", name);
             cmd.Parameters.AddWithValue("@Address", address);
             cmd.Parameters.AddWithValue("@PaymentMode", paymentMode);
+            cmd.Parameters.AddWithValue("@TakeawayTime", takeawayTime);
+            cmd.Parameters.AddWithValue("@CashAmount", cashAmount);
             cmd.Parameters.Add("@InsertedId", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             try
@@ -136,7 +143,7 @@ namespace Cafeteria.User
                 lblMsg.Text = "Your item order was successful!";
                 lblMsg.CssClass = "alert alert-success";
                 Response.AddHeader("REFRESH", "1;URL=Invoice.aspx?id=" + paymentId);
-                
+
             }
             catch (Exception ex)
             {
@@ -152,7 +159,6 @@ namespace Cafeteria.User
             //}
             con.Close();
         }
-
 
         void UpdateQuantity(int _productId, int _quantity, SqlTransaction sqlTransaction, SqlConnection sqlConnection)
         {
@@ -203,6 +209,9 @@ namespace Cafeteria.User
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
         }
+
+        
+
 
     }
 }

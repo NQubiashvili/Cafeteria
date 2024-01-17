@@ -65,6 +65,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -76,6 +77,7 @@
   <ItemGroup>
     <Content Include="Admin\Category.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
+    <Content Include="Admin\OrderStatus.aspx" />
     <Content Include="Admin\Product.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="assets\css\animate.css\css\animate.css" />
@@ -202,12 +204,7 @@
     <Content Include="TemplateFiles\css\responsive.css" />
     <Content Include="TemplateFiles\css\style.css" />
     <Content Include="TemplateFiles\images\about-img.png" />
-    <Content Include="TemplateFiles\images\client1.jpg" />
-    <Content Include="TemplateFiles\images\client2.jpg" />
-    <Content Include="TemplateFiles\images\f1.png" />
     <Content Include="TemplateFiles\images\f2.png" />
-    <Content Include="TemplateFiles\images\f3.png" />
-    <Content Include="TemplateFiles\images\f4.png" />
     <Content Include="TemplateFiles\images\f5.png" />
     <Content Include="TemplateFiles\images\f6.png" />
     <Content Include="TemplateFiles\images\f7.png" />
@@ -215,10 +212,9 @@
     <Content Include="TemplateFiles\images\f9.png" />
     <Content Include="TemplateFiles\images\favicon.png" />
     <Content Include="TemplateFiles\images\hero-bg.jpg" />
-    <Content Include="TemplateFiles\images\o1.jpg" />
-    <Content Include="TemplateFiles\images\o2.jpg" />
+    <Content Include="TemplateFiles\images\POG_LOGO.png" />
     <Content Include="TemplateFiles\js\bootstrap.js" />
-    <Content Include="TemplateFiles\js\custom.js" />
+    <Content Include="TemplateFiles\js\card.js" />
     <Content Include="TemplateFiles\js\jquery-3.4.1.min.js" />
     <Content Include="User\Book.aspx" />
     <Content Include="User\Cart.aspx" />
@@ -253,6 +249,13 @@
     </Compile>
     <Compile Include="Admin\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\OrderStatus.aspx.cs">
+      <DependentUpon>OrderStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OrderStatus.aspx.designer.cs">
+      <DependentUpon>OrderStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
@@ -374,6 +377,10 @@
     <Content Include="User\User.Master" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="TemplateFiles\fonts\FiraGO-Bold.ttf" />
+    <Content Include="TemplateFiles\fonts\FiraGO-Bold.eot" />
+    <Content Include="TemplateFiles\fonts\FiraGO-Bold.woff" />
+    <Content Include="TemplateFiles\fonts\FiraGO-Bold.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

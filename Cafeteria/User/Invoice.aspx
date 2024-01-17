@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User/User.Master" AutoEventWireup="true" CodeBehind="Invoice.aspx.cs" Inherits="Cafeteria.User.Invoice" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-     <%--For disappearing alert message--%>
+    <%--For disappearing alert message--%>
 
     <script>
         window.onload = function () {
