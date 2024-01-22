@@ -21,39 +21,41 @@ body {
         height: 50px;
         width: 140px;
         border: 1px solid #e1e1e1;
-        padding: 0 20px;
+        text-align: center;
+        position: absolute;
+        display: block;
     }
 
         .product__details__option .pro-qty .qtybtn {
             font-size: 16px;
-            float: left;
-            height: 100%;
-            line-height: 48px;
+            border-radius: 189px;
+            padding: 0px 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 1000;
         }
 
             .product__details__option .pro-qty .qtybtn.dec {
-                color: #888888;
+                background-color: red;
+                color: #ffffff;
             }
 
             .product__details__option .pro-qty .qtybtn.inc {
-                color: #111111;
+                background-color: green;
+                color: #ffffff;
             }
 
         .product__details__option .pro-qty input {
             border: none;
             height: 100%;
-            width: 72px;
+            width: 50px;
             font-size: 16px;
             font-weight: 600;
             color: #111111;
-            float: left;
             text-align: center;
         }
 /*Added For Produt Quantity increasing & decreasing*/
 
-.layout_padding {
+        .layout_padding {
     padding: 90px 0;
 }
 
@@ -186,15 +188,26 @@ a:focus {
         }
 
 .header_section {
+    background-color: #1563C1;
     padding: 15px 0;
+    position: inherit;
 }
+
+    .header_section a img {
+        display: inherit;
+        position: absolute;
+        align-items: flex-end;
+        margin: 7.5px 0px 0px 140px;
+        padding: 5px 0px;
+        height: 100px;
+    }
 
 #time {
     font-family: "FiraGO Bold";
     color: #cbcbcb;
     text-align: right;
-    display: flex;
     padding: 15px 15px;
+    display:flex;
     align-self: center;
     justify-content: flex-end;
     align-items: center;
@@ -748,6 +761,7 @@ a:focus {
     }
 
     .book_section .form_container .form-control {
+        font-family: "FiraGO SemiBold";
         width: 100%;
         border: none;
         height: 50px;
@@ -977,6 +991,7 @@ a:focus {
 
 /* footer section*/
 .footer_section {
+    font-family: "FiraGO Bold";
     background-color: #1A1A1A;
     color: #FFFFF1;
     padding: 75px 0 40px 0;
@@ -1090,3 +1105,6 @@ a:focus {
         height: 170px;
         margin-top: 10px;
     }
+
+
+

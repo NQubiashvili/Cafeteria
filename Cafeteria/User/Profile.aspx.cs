@@ -95,7 +95,7 @@ namespace Cafeteria.User
                 con = new SqlConnection(Connection.GetConnectionString());
                 cmd = new SqlCommand("Invoice", con);
                 cmd.Parameters.AddWithValue("@Action", "IBID");
-                cmd.Parameters.AddWithValue("@PaymentId", Convert.ToInt32(Request.QueryString["id"]));
+                cmd.Parameters.AddWithValue("@PaymentId", Convert.ToInt32(paymentId.Value));
                 cmd.Parameters.AddWithValue("@UserId", Session["userId"]);
                 cmd.CommandType = CommandType.StoredProcedure;
                 sda = new SqlDataAdapter(cmd);

@@ -51,7 +51,7 @@
                                                                         <th>სრული ფასი</th>
                                                                         <th>გადახდის მეთოდი</th>
                                                                         <th>მიტანის ადგილი</th>
-                                                                        <th>სახელი</th>
+                                                                        <th>შემკვეთის სახელი</th>
                                                                         <th class="datatable-nosort">მოქმედება</th>
                                                                     </tr>
                                                                 </thead>
@@ -62,19 +62,19 @@
                                                                 <td class="table-plus"><%# Eval("OrderNo") %> </td>
                                                                 <td> <%# Eval("OrderDate") %> </td>
                                                                 <td>
-                                                                    <asp:Label ID="lblIsActive" runat="server" Text='<%# Eval("Status") %>'>
-                                                                        CssClass='<%# Eval("Status").ToString() == "Delivered" ? "badge badge-success" : (Eval("Status").ToString() == "NotPaied" ? "badge badge-danger" : "badge badge-warning") %>'
+                                                                    <asp:Label ID="lblIsActive" runat="server" Text='<%# Eval("Status") %>'
+                                                                        CssClass='<%# Eval("Status").ToString() == "Delivered" ? "badge badge-success" : "badge badge-danger" %>'>
                                                                     </asp:Label>
 
                                                                 </td>
-                                                                <td><%# Eval("Name") %> </td>
+                                                                <td><%# Eval("ProductName") %> </td>
                                                                 <td><%# Eval("TotalPrice") %> </td>
                                                                 <td><%# Eval("PaymentMode") %> </td>
                                                                 <td><%# Eval("Address") %> </td>
-                                                                <td><%# Eval("OrdName") %> </td>
+                                                                <td><%# Eval("PaymentName") %> </td>
                                                                 <td>
                                                                     <asp:LinkButton ID="lnkEdit" Text="რედაქტირება" runat="server" CssClass="badge badge-primary"
-                                                                        CommandArgument='<%# Eval("OrderDetailId") %>' CommandName="edit">
+                                                                        CommandArgument='<%# Eval("OrderDetailsId") %>' CommandName="edit">
                                                                         <i class="ti-pencil"></i>
                                                                     </asp:LinkButton>
                                                                 </td>
@@ -101,9 +101,9 @@
                                                     <label>შეკვეთის სტატუსი</label>
                                                     <div>
                                                         <asp:DropDownList ID="ddlOrderStatus" runat="server" CssClass="form-control">
-                                                            <asp:ListItem Value="0">Select Status</asp:ListItem>
+                                                            <asp:ListItem Value="0">აირჩიეთ სტატუსი</asp:ListItem>
                                                             <asp:ListItem>Pending</asp:ListItem>
-                                                            <asp:ListItem>Processing</asp:ListItem>
+                                                            <asp:ListItem>Dispatched</asp:ListItem>
                                                             <asp:ListItem>Delivered</asp:ListItem>
                                                             <asp:ListItem>NotPayed</asp:ListItem>
                                                         </asp:DropDownList>

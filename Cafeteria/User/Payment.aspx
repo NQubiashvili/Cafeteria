@@ -25,6 +25,7 @@
             border: none;
             box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
         }
+
     </style>
     <script>
         /*For disappearing alert message*/
@@ -113,6 +114,7 @@
                                 <!-- End -->--%>
                             <!-- Cash On Delivery info -->
                             <div id="COD" class="tab-pane fade show active pt-3">
+
                                 <div class="form-group">
                                     <label for="txtName">
                                         <h6>სახელი,გვარი</h6>
@@ -125,6 +127,8 @@
                                         ValidationExpression="^[a-zA-Z\s]+$" ControlToValidate="txtName" ValidationGroup="cod">*
                                     </asp:RegularExpressionValidator>
                                     <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="სახელი,გვარი"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
                                     <label for="txtCODAddress">
                                         <h6>მიტანის ადგილი</h6>
                                     </label>
@@ -134,52 +138,37 @@
                                         ControlToValidate="txtCODAddress" Display="Dynamic" SetFocusOnError="true" ValidationGroup="cod"
                                         Font-Names="Segoe Script"></asp:RequiredFieldValidator>
                                 </div>
+
+
                                 <div class="form-group">
                                     <label for="ddlTakeawayTime">
-                                        <h6>მიტანის დრო</h6>
+                                        <h6">მიტანის დრო</h6>
                                     </label>
-                                    <%--<select id="ddlTakeawayTime" name="ddlTakeawayTime" class="form-control" runat="server" required>
-                                        <option value="0">აირჩიეთ დრო</option>
-                                        <% for (int hour = 10; hour <= 22; hour++)
-                                            { %>
-                                        <% for (int minute = 0; minute < 60; minute += 30)
-                                            { %>
-                                        <% string fromTime = $"{hour:00}:{minute:00}";
-                                            string toTime = $"{(hour + (minute + 30) / 60):00}:{(minute + 30) % 60:00}"; %>
-                                        <option value='<%= fromTime %>'><%= fromTime %> -დან <%= toTime %> -მდე </option>
-                                        <% } %>
-                                        <% } %>
-                                    </select>--%>
-
-                                    <asp:DropDownList id="ddlTakeawayTime" name="ddlTakeawayTime" class="form-control" runat="server"
-                                        DataTextField="TakeawayTime"
-                                        AppendDataBoundItems="true">
-                                        <asp:ListItem value="0">აირჩიეთ მიტანის დრო</asp:ListItem>
-                                        <asp:ListItem >10:00-დან 10:30-მდე</asp:ListItem>
-                                        <asp:ListItem >10:30-დან 11:00-მდე</asp:ListItem>
-                                        <asp:ListItem >11:00-დან 11:30-მდე</asp:ListItem>
-                                        <asp:ListItem >11:30-დან 12:00-მდე</asp:ListItem>
-                                        <asp:ListItem >12:00-დან 12:30-მდე</asp:ListItem>
-                                        <asp:ListItem >12:30-დან 13:00-მდე</asp:ListItem>
-                                        <asp:ListItem >13:00-დან 13:30-მდე</asp:ListItem>
-                                        <asp:ListItem >13:30-დან 14:00-მდე</asp:ListItem>
-                                        <asp:ListItem >14:00-დან 14:30-მდე</asp:ListItem>
-                                        <asp:ListItem >14:30-დან 15:00-მდე</asp:ListItem>
-                                        <asp:ListItem >15:00-დან 15:30-მდე</asp:ListItem>
-                                        <asp:ListItem >15:30-დან 16:00-მდე</asp:ListItem>
-                                        <asp:ListItem >16:00-დან 16:30-მდე</asp:ListItem>
-                                        <asp:ListItem >16:30-დან 17:00-მდე</asp:ListItem>
-                                        <asp:ListItem >17:00-დან 17:30-მდე</asp:ListItem>
-                                        <asp:ListItem >17:30-დან 18:00-მდე</asp:ListItem>
-
+                                    <asp:DropDownList ID="ddlTakeawayTime" Style="float:none" name="ddlTakeawayTime" CssClass="form-control " runat="server"
+                                        DataTextField="TakeawayTime">
+                                        <asp:ListItem Value="0">აირჩიეთ მიტანის დრო</asp:ListItem>
+                                        <asp:ListItem>10:00-დან 10:30-მდე</asp:ListItem>
+                                        <asp:ListItem>10:30-დან 11:00-მდე</asp:ListItem>
+                                        <asp:ListItem>11:00-დან 11:30-მდე</asp:ListItem>
+                                        <asp:ListItem>11:30-დან 12:00-მდე</asp:ListItem>
+                                        <asp:ListItem>12:00-დან 12:30-მდე</asp:ListItem>
+                                        <asp:ListItem>12:30-დან 13:00-მდე</asp:ListItem>
+                                        <asp:ListItem>13:00-დან 13:30-მდე</asp:ListItem>
+                                        <asp:ListItem>13:30-დან 14:00-მდე</asp:ListItem>
+                                        <asp:ListItem>14:00-დან 14:30-მდე</asp:ListItem>
+                                        <asp:ListItem>14:30-დან 15:00-მდე</asp:ListItem>
+                                        <asp:ListItem>15:00-დან 15:30-მდე</asp:ListItem>
+                                        <asp:ListItem>15:30-დან 16:00-მდე</asp:ListItem>
+                                        <asp:ListItem>16:00-დან 16:30-მდე</asp:ListItem>
+                                        <asp:ListItem>16:30-დან 17:00-მდე</asp:ListItem>
+                                        <asp:ListItem>17:00-დან 17:30-მდე</asp:ListItem>
+                                        <asp:ListItem>17:30-დან 18:00-მდე</asp:ListItem>
                                     </asp:DropDownList>
-
 
                                     <asp:RequiredFieldValidator ID="rfvTakeawayTime" runat="server" ErrorMessage="დროის არჩევა აუცილებელია"
                                         ControlToValidate="ddlTakeawayTime" ForeColor="Red" Display="Dynamic" SetFocusOnError="true"
                                         ValidationGroup="cod" ClientIDMode="Static">*</asp:RequiredFieldValidator>
-
-                                </div>
+                                    </div>
 
                                 <!-- Add the following code inside the <div id="credit-card" class="tab-pane fade show active pt-3"> -->
                                 <div class="form-group">
@@ -219,7 +208,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 </asp:Content>

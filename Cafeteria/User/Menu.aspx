@@ -14,7 +14,7 @@
                 <div class="align-self-end">
                     <asp:Label ID="lblMsg" runat="server" Visible="false"></asp:Label>
                 </div>
-                <h2>Our Menu
+                <h2>მენიუ
                 </h2>
             </div>
 

@@ -23,7 +23,7 @@ namespace Cafeteria.Admin
         {
             if (!IsPostBack)
             {
-                Session["BreadCrum"] = "Users";
+                Session["BreadCrum"] = "მომხმარებლები";
                 if (Session["admin"] == null)
                 {
                     Response.Redirect("../User/Login.aspx");

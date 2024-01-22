@@ -135,16 +135,17 @@
                                                     <div class="container">
                                                         <div class="row pt-1 pb-1" style="background-color:lightgray">
                                                             <div class="col-4">
-                                                                <span class="badge badge-pill badge-danger text-white">
-                                                                    <%# Eval("Srno") %>
+                                                                <span class="badge badge-pill badge-dark text-white">
+                                                                    <%# Eval("SrNo") %>
                                                                 </span>
+                                                                გადახდის მეთოდი: <%# Eval("PaymentMode").ToString() == "cod" ? "ადგილზე გადახდა" : Eval("PaymentMode").ToString().ToUpper() %>
                                                             </div>
-                                                            <div class="col-2">
+                                                            <div class="col-2" style="text-align:end">
                                                                 <a href="Invoice.aspx?id=<%# Eval("PaymentId") %>" class="btn btn-info btn-sm">
                                                                     <i class="fa fa-download mr-2"></i>ინვოისი</a>
                                                             </div>
                                                         </div>
-                                                        <asp:HiddenField ID="hdnPayment" runat="server" Value='<%# Eval("PaymentId") %>'/>
+                                                        <asp:HiddenField ID="hdnPaymentId" runat="server" Value='<%# Eval("PaymentId") %>'/>
 
                                                         <asp:Repeater ID="rOrders" runat="server">
                                                             <HeaderTemplate>

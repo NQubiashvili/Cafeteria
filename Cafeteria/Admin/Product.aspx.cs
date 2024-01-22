@@ -22,7 +22,13 @@ namespace Cafeteria.Admin
         {
             if (!IsPostBack)
             {
-                Session["breadCrum"] = "Product";
+
+                ddlQuantityUnit.Items.Add(new ListItem("გრამი", "გრ."));
+                ddlQuantityUnit.Items.Add(new ListItem("მილილიტრი", "მლ."));
+                ddlQuantityUnit.Items.Add(new ListItem("ლიტრი", "ლ."));
+                ddlQuantityUnit.Items.Add(new ListItem("ნაჭერი", "ნაჭ."));
+
+                Session["breadCrum"] = "პროდუქტები";
                 if (Session["admin"] == null)
                 {
                     Response.Redirect("../User/Login.aspx");
@@ -48,6 +54,7 @@ namespace Cafeteria.Admin
             cmd.Parameters.AddWithValue("@Description", txtDescription.Text.Trim());
             cmd.Parameters.AddWithValue("@Price", txtPrice.Text.Trim());
             cmd.Parameters.AddWithValue("@Quantity", txtQuantity.Text.Trim());
+            cmd.Parameters.AddWithValue("@QuantityUnit", ddlQuantityUnit.Text.Trim());
             cmd.Parameters.AddWithValue("@CategoryId", ddlCategories.SelectedValue);
             cmd.Parameters.AddWithValue("@IsActive", cbIsActive.Checked);
             if (fuProductImage.HasFile)
@@ -65,7 +72,7 @@ namespace Cafeteria.Admin
                 else
                 {
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Please select .jpg, .jpeg or .png image";
+                    lblMsg.Text = "გთხოვთ აირჩიეთ სწორი სურათის ფორმატი .jpg, .jpeg or .png";
                     lblMsg.CssClass = "alert alert-danger";
                     isValidToExecute = false;
                 }
@@ -82,9 +89,9 @@ namespace Cafeteria.Admin
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    actionName = ProductId == 0 ? "inserted" : "updated";
+                    actionName = ProductId == 0 ? "დაემატა" : "განახლდა";
                     lblMsg.Visible = true;
-                    lblMsg.Text = "Product " + actionName + " successfull!";
+                    lblMsg.Text = "პროდუქტი " + actionName + " წარმატებით!";
                     lblMsg.CssClass = "alert alert-success";
                     getProducts();
                     clear();
@@ -170,7 +177,7 @@ namespace Cafeteria.Admin
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    lblMsg.Text = "Category Deleted Successfully!";
+                    lblMsg.Text = "პროდუქტი წაიშალა წარმატებით!";
                     lblMsg.CssClass = "alert alert-success";
                     getProducts();
                 }

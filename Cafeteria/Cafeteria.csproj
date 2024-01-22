@@ -76,9 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Category.aspx" />
+    <Content Include="Admin\Contacts.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\OrderStatus.aspx" />
     <Content Include="Admin\Product.aspx" />
+    <Content Include="Admin\Report.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="assets\css\animate.css\css\animate.css" />
     <Content Include="assets\css\bootstrap\css\bootstrap.min.css" />
@@ -132,6 +134,7 @@
     <Content Include="assets\images\mega-menu\04.jpg" />
     <Content Include="assets\images\mega-menu\05.jpg" />
     <Content Include="assets\images\mega-menu\06.jpg" />
+    <Content Include="assets\images\Admin.png" />
     <Content Include="assets\images\pattern2.jpg" />
     <Content Include="assets\images\user.png" />
     <Content Include="assets\js\bootstrap-growl.min.js" />
@@ -204,6 +207,7 @@
     <Content Include="TemplateFiles\css\responsive.css" />
     <Content Include="TemplateFiles\css\style.css" />
     <Content Include="TemplateFiles\images\about-img.png" />
+    <Content Include="TemplateFiles\images\cafe.jpg" />
     <Content Include="TemplateFiles\images\f2.png" />
     <Content Include="TemplateFiles\images\f5.png" />
     <Content Include="TemplateFiles\images\f6.png" />
@@ -218,6 +222,7 @@
     <Content Include="TemplateFiles\js\jquery-3.4.1.min.js" />
     <Content Include="User\Book.aspx" />
     <Content Include="User\Cart.aspx" />
+    <Content Include="User\Contact.aspx" />
     <Content Include="User\Default.aspx" />
     <Content Include="User\Invoice.aspx" />
     <Content Include="User\Login.aspx" />
@@ -243,6 +248,13 @@
     <Compile Include="Admin\Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Contacts.aspx.cs">
+      <DependentUpon>Contacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Contacts.aspx.designer.cs">
+      <DependentUpon>Contacts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -263,6 +275,13 @@
     </Compile>
     <Compile Include="Admin\Product.aspx.designer.cs">
       <DependentUpon>Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>
@@ -291,6 +310,13 @@
     </Compile>
     <Compile Include="User\Cart.aspx.designer.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -381,6 +407,7 @@
     <Content Include="TemplateFiles\fonts\FiraGO-Bold.eot" />
     <Content Include="TemplateFiles\fonts\FiraGO-Bold.woff" />
     <Content Include="TemplateFiles\fonts\FiraGO-Bold.woff2" />
+    <Content Include="TemplateFiles\fonts\georgian.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

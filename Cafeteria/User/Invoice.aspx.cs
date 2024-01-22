@@ -16,6 +16,7 @@ using Cafeteria.Admin;
 using System.Windows.Forms;
 
 
+
 namespace Cafeteria.User
 {
     public partial class Invoice : System.Web.UI.Page
@@ -25,7 +26,6 @@ namespace Cafeteria.User
         SqlCommand cmd;
         SqlDataAdapter sda;
         DataTable dt;
-        [STAThread]
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +37,7 @@ namespace Cafeteria.User
                     {
                         rOrderItem.DataSource = GetOrderDetails();
                         rOrderItem.DataBind();
-                        
+
                     }
                 }
                 else
@@ -74,42 +74,32 @@ namespace Cafeteria.User
             //dt.Rows.Clear();
 
             // Add a new row with the calculated grandTotal
-            //DataRow dr = dt.NewRow();
-            // dr["TotalPrice"] = grandTotal;
-            //dt.Rows.Add(dr);
+            DataRow dr = dt.NewRow();
+             dr["TotalPrice"] = grandTotal;
+            dt.Rows.Add(dr);
 
             return dt;
 
         }
 
-      
+
 
 
         protected void lbDownloadInvoice_Click(object sender, EventArgs e)
         {
             try
             {
-                // Show SaveFileDialog to allow the user to choose the download path
-                SaveFileDialog saveDialog = new SaveFileDialog();
-                saveDialog.Filter = "PDF Files|*.pdf";
-                saveDialog.Title = "Save PDF File";
-                saveDialog.FileName = "Cafeteria_Invoice.pdf"; // Default file name
+                string downloadPath = @"C:\ინვოისი.pdf";
+                DataTable dtbl = GetOrderDetails();
+                ExportToPdf(dtbl, downloadPath, "შეკვეთის ინვოისი");
 
-                if (saveDialog.ShowDialog() == DialogResult.OK)
+                WebClient client = new WebClient();
+                Byte[] buffer = client.DownloadData(downloadPath);
+                if (buffer != null)
                 {
-                    string downloadPath = saveDialog.FileName;
-
-                    DataTable dtbl = GetOrderDetails();
-                    ExportToPdf(dtbl, downloadPath, "Order Invoice");
-
-                    WebClient client = new WebClient();
-                    byte[] buffer = client.DownloadData(downloadPath);
-                    if (buffer != null)
-                    {
-                        Response.ContentType = "application/pdf";
-                        Response.AddHeader("content-length", buffer.Length.ToString());
-                        Response.BinaryWrite(buffer);
-                    }
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("content-length", buffer.Length.ToString());
+                    Response.BinaryWrite(buffer);
                 }
             }
             catch (Exception ex)
@@ -127,36 +117,40 @@ namespace Cafeteria.User
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
 
-            // Load Georgian font
-            BaseFont bfGeorgian = BaseFont.CreateFont(@"../TemplateFiles/fonts/FiraGO-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            // Set Georgian font
+            string fontPath = Path.Combine(Server.MapPath("../TemplateFiles/fonts"), "georgian.ttf");
+            BaseFont btnAuthor = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fntAuthor = new Font(btnAuthor, 8, 2, Color.GRAY);
 
-            // Report Header
-            Font fntHead = new Font(bfGeorgian, 16, 1, Color.GRAY);
+            //Report Header
+            BaseFont bfntHead = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            Font fntHead = new Font(bfntHead, 16, 1, Color.GRAY);
             Paragraph prgHeading = new Paragraph();
             prgHeading.Alignment = Element.ALIGN_CENTER;
             prgHeading.Add(new Chunk(strHeader.ToUpper(), fntHead));
             document.Add(prgHeading);
 
-            // Author
+            //Author
             Paragraph prgAuthor = new Paragraph();
-            Font fntAuthor = new Font(bfGeorgian, 8, 2, Color.GRAY);
+            //BaseFont btnAuthor = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            //Font fntAuthor = new Font(btnAuthor, 8, 2, Color.GRAY);
             prgAuthor.Alignment = Element.ALIGN_RIGHT;
-            prgAuthor.Add(new Chunk("Order From : Cafeteria Fast Food", fntAuthor));
-            prgAuthor.Add(new Chunk("\nOrder Date : " + dtblTable.Rows[0]["OrderDate"].ToString(), fntAuthor));
+            prgAuthor.Add(new Chunk("შეკვეთის ფორმა : კაფეტერია", fntAuthor));
+            prgAuthor.Add(new Chunk("\nშეკვეთის თარიღი : " + dtblTable.Rows[0]["OrderDate"].ToString(), fntAuthor));
             document.Add(prgAuthor);
 
-            // Add a line separation
+            //Add a line seperation
             Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, Color.BLACK, Element.ALIGN_LEFT, 1)));
             document.Add(p);
 
-            // Add line break
+            //Add line break
             document.Add(new Chunk("\n", fntHead));
 
-            // Write the table
+            //Write the table
             PdfPTable table = new PdfPTable(dtblTable.Columns.Count - 2);
-
-            // Table header
-            Font fntColumnHeader = new Font(bfGeorgian, 9, 1, Color.WHITE);
+            //Table header
+            BaseFont btnColumnHeader = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            Font fntColumnHeader = new Font(btnColumnHeader, 9, 1, Color.WHITE);
             for (int i = 0; i < dtblTable.Columns.Count - 2; i++)
             {
                 PdfPCell cell = new PdfPCell();
@@ -164,9 +158,8 @@ namespace Cafeteria.User
                 cell.AddElement(new Chunk(dtblTable.Columns[i].ColumnName.ToUpper(), fntColumnHeader));
                 table.AddCell(cell);
             }
-
-            // Table Data
-            Font fntColumnData = new Font(bfGeorgian, 8, 1, Color.BLACK);
+            //table Data
+            Font fntColumnData = new Font(btnColumnHeader, 8, 1, Color.BLACK);
             for (int i = 0; i < dtblTable.Rows.Count; i++)
             {
                 for (int j = 0; j < dtblTable.Columns.Count - 2; j++)
@@ -182,7 +175,5 @@ namespace Cafeteria.User
             writer.Close();
             fs.Close();
         }
-
-
     }
 }

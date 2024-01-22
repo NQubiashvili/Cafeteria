@@ -23,7 +23,7 @@ namespace Cafeteria.User
                 Control SliderUserControl = (Control)Page.LoadControl("SliderUserControl.ascx");
 
                 //Add tthe control to the panel
-                pnlSliderUC.Controls.Add(SliderUserControl);
+                //pnlSliderUC.Controls.Add(SliderUserControl);
             }
 
             if (Session["userId"] != null)

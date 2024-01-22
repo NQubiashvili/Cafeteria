@@ -136,8 +136,8 @@
 
                                 <li class="user-profile header-notification">
                                     <a href="#!">
-                                        <img src="../assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                        <span>Admin</span>
+                                        <img src="../assets/images/Admin.png" class="img-radius" alt="User-Profile-Image">
+                                        <span>სამართავი პანელი</span>
                                         <i class="ti-angle-down"></i>
                                     </a>
                                     <ul class="show-notification profile-notification">
@@ -147,7 +147,7 @@
                                                 <i class="ti-layout-sidebar-left"></i>Logout
                                             </a>--%>
                                             <asp:LinkButton ID="lbLogout" runat="server" CausesValidation="false" OnClick="lbLogout_Click">
-                                                <i class="ti-layout-sidebar-left"></i>Logout
+                                                <i class="ti-layout-sidebar-left"></i>გამოსვლა
                                             </asp:LinkButton>
                                         </li>
                                     </ul>
@@ -162,80 +162,80 @@
                             <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                             <div class="pcoded-inner-navbar main-menu" id="navbarSupportedContent">
 
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">მთავრი</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
                                         <a href="Dashboard.aspx">
                                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">მთავარი</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
 
                                 </ul>
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Category Crud</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">კატეგორიების დამატება</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
                                         <a href="Category.aspx">
                                             <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">კატეგორია</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">კატეგორიები</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
 
                                 </ul>
 
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Product Crud</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">პროდუქტის დამარება</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
                                         <a href="Product.aspx">
                                             <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">პროდუქტი</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">პროდუქტები</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
 
                                 </ul>
 
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Product Status</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">პროდუქტის სტატუსი</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
                                         <a href="OrderStatus.aspx">
-                                            <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
+                                            <span class="pcoded-micon"><i class="ti-list-ol"></i><b>M</b></span>
                                             <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">შეკვეთის სტატუსი</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                 </ul>
 
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">User's List</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">მომხმარებლების სია</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
                                         <a href="Users.aspx">
-                                            <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Users</span>
+                                            <span class="pcoded-micon"><i class="ion-person"></i><b>M</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">მომხმარებლები</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                 </ul>
 
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">User's Feedback/Query</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">მომხმარებელთან კონტაქტი</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
-                                        <a href="#">
-                                            <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Contact</span>
+                                        <a href="Contacts.aspx">
+                                            <span class="pcoded-micon"><i class="ion-chatbox-working"></i><b>M</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">კონტაქტი</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                 </ul>
 
-                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">Reports</div>
+                                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.other">გაყიდვების სია</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
-                                        <a href="OrderStatus.aspx">
-                                            <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Selling Report</span>
+                                        <a href="Report.aspx">
+                                            <span class="pcoded-micon"><i class="ion-search"></i><b>M</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">გაყიდვები</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -254,7 +254,7 @@
                                                     <i class="icofont icofont-home"></i>
                                                 </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="Dashboard.aspx">Dashboard</a>
+                                            <li class="breadcrumb-item"><a href="Dashboard.aspx">მთავარი</a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#"><%Response.Write(Session["breadCrum"]); %> </a>
                                             </li>
@@ -296,6 +296,7 @@
     <script src="../assets/js/pcoded.min.js"></script>
     <script src="../assets/js/demo-12.js"></script>
     <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../TemplateFiles/js/custom.js"></script>
     <script>
         var $window = $(window);
         var nav = $('.fixed-button');

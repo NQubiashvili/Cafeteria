@@ -31,11 +31,11 @@
                         <thead class="bg-dark text-white">
                             <tr>
                                 <th>Sr.No</th>
-                                <th>Order Number</th>
-                                <th>Item Name</th>
-                                <th>Unit Price</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
+                                <th>შეკვეთის ნომერი</th>
+                                <th>პროდუქტის სახელი</th>
+                                <th>ერთეულის ფასი</th>
+                                <th>რაოდენობა</th>
+                                <th>სრული ფასი</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,7 +58,7 @@
 
             <div class="text-center">
                 <asp:LinkButton ID="lbDownloadInvoice" runat="server" CssClass="btn btn-info" OnClick="lbDownloadInvoice_Click">
-                   <i class="fa fa-file-pdf-o mr-2"></i> Download Invoice
+                   <i class="fa fa-file-pdf-o mr-2"></i> ინვოისის ჩამოტვირთვა
                 </asp:LinkButton>
             </div>
 

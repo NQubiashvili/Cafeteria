@@ -21,7 +21,7 @@ namespace Cafeteria.Admin
         {
             if (!IsPostBack)
             {
-                Session["breadCrum"] = "Order Status";
+                Session["breadCrum"] = "შეკვეთის სტატუსი";
                 if (Session["admin"] == null)
                 {
                     Response.Redirect("../User/Login.aspx");
@@ -63,7 +63,7 @@ namespace Cafeteria.Admin
                 dt = new DataTable();
                 sda.Fill(dt);
                 ddlOrderStatus.SelectedValue = dt.Rows[0]["Status"].ToString();
-                hdnId.Value = dt.Rows[0]["OrderDetailId"].ToString();
+                hdnId.Value = dt.Rows[0]["OrderDetailsId"].ToString();
                 pUpdateOrderStatus.Visible = true;
                 LinkButton btn = e.Item.FindControl("lnkEdit") as LinkButton;
                 btn.CssClass = "badge badge-warning";

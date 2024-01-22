@@ -87,7 +87,7 @@
                     <tr>
                         <td colspan="3"></td>
                         <td class="pl-lg-5">
-                            <b>ჯამური ფასი:-</b>
+                            <b>ჯამური ფასი:</b>
                         </td>
                         <td>₾<% Response.Write(Session["grandTotalPrice"]); %></td>
                         <td></td>
